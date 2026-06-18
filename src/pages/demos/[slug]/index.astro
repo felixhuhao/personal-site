@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { projects } from "../../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.demoPath.split("/").filter(Boolean).at(-1) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={`${project.shortTitle} Demo - Hao Hu`} description={project.summary}>
+  <section class="project-hero">
+    <div class="project-hero-copy">
+      <a class="back-link" href={`/projects/${project.slug}/`}>Back to project</a>
+      <div class="card-title-row">
+        <h1>{project.shortTitle} demo</h1>
+        <span class={`status status-${project.status.toLowerCase().replaceAll(" ", "-")}`}>
+          {project.status}
+        </span>
+      </div>
+      <p>
+        This route is reserved for the remote deployment. Until the service is
+        live, use the project page, demo script, and repository links below.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={`/projects/${project.slug}/`}>Project details</a>
+        <a class="button button-secondary" href={project.repos[0].url}>View source</a>
+      </div>
+    </div>
+    <img class="project-hero-image" src={project.image} alt={`${project.shortTitle} interface preview`} />
+  </section>
+
+  <section class="section detail-grid">
+    <article>
+      <p class="eyebrow">Demo script</p>
+      <h2>What to try after launch</h2>
+      <ul class="check-list">
+        {project.tryThis.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+    <article>
+      <p class="eyebrow">Launch checklist</p>
+      <h2>Before going public</h2>
+      <ul class="check-list">
+        {project.deploymentNotes.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  </section>
+</BaseLayout>

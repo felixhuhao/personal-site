@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={`${project.title} - Hao Hu`} description={project.summary}>
+  <section class="project-hero">
+    <div class="project-hero-copy">
+      <a class="back-link" href="/#projects">Back to projects</a>
+      <div class="card-title-row">
+        <h1>{project.title}</h1>
+        <span class={`status status-${project.status.toLowerCase().replaceAll(" ", "-")}`}>
+          {project.status}
+        </span>
+      </div>
+      <p>{project.summary}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={project.demoPath}>Open demo path</a>
+        <a class="button button-secondary" href={project.repos[0].url}>View source</a>
+      </div>
+    </div>
+    <img class="project-hero-image" src={project.image} alt={`${project.shortTitle} interface preview`} />
+  </section>
+
+  <section class="section detail-grid">
+    <article>
+      <p class="eyebrow">Architecture</p>
+      <h2>How it works</h2>
+      <p>{project.architecture}</p>
+      <div class="tag-row wide">
+        {project.stack.map((item) => <span>{item}</span>)}
+      </div>
+    </article>
+
+    <article>
+      <p class="eyebrow">Demo</p>
+      <h2>Access</h2>
+      <p>
+        Planned route: <a href={project.demoPath}>{project.demoPath}</a>
+      </p>
+      {
+        project.credentials ? (
+          <div class="credential-list">
+            {project.credentials.map((credential) => (
+              <div class="credential-row">
+                <strong>{credential.username}</strong>
+                <code>{credential.password}</code>
+                <span>{credential.note}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="muted-copy">No public credentials are needed for the first demo path.</p>
+        )
+      }
+    </article>
+  </section>
+
+  <section class="section columns-three">
+    <article>
+      <p class="eyebrow">Capabilities</p>
+      <h2>What it shows</h2>
+      <ul class="check-list">
+        {project.capabilities.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+    <article>
+      <p class="eyebrow">Proof</p>
+      <h2>Evidence</h2>
+      <ul class="check-list">
+        {project.proof.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+    <article>
+      <p class="eyebrow">Try this</p>
+      <h2>Demo script</h2>
+      <ul class="check-list">
+        {project.tryThis.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="section split-section">
+    <div>
+      <p class="eyebrow">Deployment</p>
+      <h2>Remote rollout notes</h2>
+    </div>
+    <ul class="check-list">
+      {project.deploymentNotes.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">Source</p>
+    <h2>Repositories</h2>
+    <div class="repo-list">
+      {project.repos.map((repo) => <a href={repo.url}>{repo.label}</a>)}
+    </div>
+  </section>
+</BaseLayout>

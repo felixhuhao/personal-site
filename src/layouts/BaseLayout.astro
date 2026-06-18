@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = "Hao Hu - AI Project Portfolio",
+  description = "Portfolio and demo hub for production-shaped AI agent projects.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Home">
+        <span class="brand-mark">HH</span>
+        <span>Hao Hu</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/#projects">Projects</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="https://github.com/felixhuhao">GitHub</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>AI systems portfolio</span>
+      <a href="https://github.com/felixhuhao">github.com/felixhuhao</a>
+    </footer>
+  </body>
+</html>

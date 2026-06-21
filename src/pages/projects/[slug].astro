@@ -24,7 +24,7 @@ const { project } = Astro.props;
       </div>
       <p>{project.summary}</p>
       <div class="hero-actions">
-        <a class="button button-primary" href={project.demoPath}>Open demo path</a>
+        <a class="button button-primary" href={project.demoUrl}>Open live demo</a>
         <a class="button button-secondary" href={project.repos[0].url}>View source</a>
       </div>
     </div>
@@ -45,7 +45,10 @@ const { project } = Astro.props;
       <p class="eyebrow">Demo</p>
       <h2>Access</h2>
       <p>
-        Planned route: <a href={project.demoPath}>{project.demoPath}</a>
+        Live endpoint: <a href={project.demoUrl}>{project.demoUrl}</a>
+      </p>
+      <p class="muted-copy">
+        Fallback page: <a href={project.demoPath}>{project.demoPath}</a>
       </p>
       {
         project.credentials ? (

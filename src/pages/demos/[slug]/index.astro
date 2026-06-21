@@ -23,12 +23,12 @@ const { project } = Astro.props;
         </span>
       </div>
       <p>
-        This route is reserved for the remote deployment. Until the service is
-        live, use the project page, demo script, and repository links below.
+        The live demo is currently deployed over HTTP on the shared server.
+        This page remains as a stable portfolio fallback.
       </p>
       <div class="hero-actions">
-        <a class="button button-primary" href={`/projects/${project.slug}/`}>Project details</a>
-        <a class="button button-secondary" href={project.repos[0].url}>View source</a>
+        <a class="button button-primary" href={project.demoUrl}>Open live demo</a>
+        <a class="button button-secondary" href={`/projects/${project.slug}/`}>Project details</a>
       </div>
     </div>
     <img class="project-hero-image" src={project.image} alt={`${project.shortTitle} interface preview`} />

@@ -8,9 +8,8 @@ import { deploymentPhases, projects } from "../data/projects";
     <p class="eyebrow">Roadmap</p>
     <h1>Personal site and remote demo deployment</h1>
     <p>
-      A static portfolio ships first. Live demos are then added behind one
-      domain with Nginx subpath routing, private service ports, and demo-only
-      data.
+      The demos are live over HTTP on one public IP with separate ports. The
+      next infrastructure step is adding a domain, HTTPS, and Nginx routing.
     </p>
   </section>
 
@@ -23,13 +22,10 @@ import { deploymentPhases, projects } from "../data/projects";
 
   <section class="section detail-grid">
     <article>
-      <p class="eyebrow">Nginx routing</p>
-      <h2>One domain, clear paths</h2>
+      <p class="eyebrow">Current routing</p>
+      <h2>HTTP IP and ports</h2>
       <div class="route-table">
-        <div><span>Portfolio</span><code>/</code></div>
-        <div><span>Enterprise RAG</span><code>/demos/enterprise-rag/</code></div>
-        <div><span>NL2SQL Agent</span><code>/demos/nl2sql/</code></div>
-        <div><span>E-Commerce Agent</span><code>/demos/ecommerce/</code></div>
+        {projects.map((project) => <div><span>{project.shortTitle}</span><code>{project.demoUrl}</code></div>)}
       </div>
     </article>
     <article>
@@ -39,7 +35,8 @@ import { deploymentPhases, projects } from "../data/projects";
         <li>Use demo-only data and API keys.</li>
         <li>Keep databases, MCP servers, and internal health endpoints private.</li>
         <li>Add service tokens to MCP endpoints outside local development.</li>
-        <li>Show screenshots when a live demo is offline.</li>
+        <li>Move public access to HTTPS once a domain is available.</li>
+        <li>Show screenshots or fallback pages when a live demo is offline.</li>
       </ul>
     </article>
   </section>

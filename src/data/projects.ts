@@ -7,6 +7,7 @@ export type Project = {
   summary: string;
   status: DemoStatus;
   demoPath: string;
+  demoUrl: string;
   image: string;
   repos: Array<{ label: string; url: string }>;
   stack: string[];
@@ -25,8 +26,9 @@ export const projects: Project[] = [
     shortTitle: "Enterprise RAG",
     summary:
       "Document intelligence platform for ingesting enterprise knowledge, retrieving evidence with explicit strategies, and answering with citations.",
-    status: "Starting soon",
+    status: "Live",
     demoPath: "/demos/enterprise-rag/",
+    demoUrl: "http://175.27.136.242:5173/",
     image: "/images/enterprise-rag.svg",
     repos: [
       {
@@ -81,9 +83,9 @@ export const projects: Project[] = [
       },
     ],
     deploymentNotes: [
-      "Deploy first because the stack is self-contained through Docker Compose.",
+      "Live demo is currently exposed on the shared server at port 5173.",
       "Seed demo data after startup and expose only demo documents.",
-      "Keep API keys demo-scoped and route backend health checks internally.",
+      "Keep API keys demo-scoped and move behind a reverse proxy when a domain is available.",
     ],
   },
   {
@@ -92,8 +94,9 @@ export const projects: Project[] = [
     shortTitle: "NL2SQL Agent",
     summary:
       "OLAP-focused data agent that turns business questions into guarded SQL, executes them on DuckDB or ClickHouse, and recommends charts.",
-    status: "Starting soon",
+    status: "Live",
     demoPath: "/demos/nl2sql/",
+    demoUrl: "http://175.27.136.242:5174/",
     image: "/images/nl2sql-agent.svg",
     repos: [
       {
@@ -131,7 +134,7 @@ export const projects: Project[] = [
       "Try a destructive SQL request and verify that it is blocked.",
     ],
     deploymentNotes: [
-      "Deploy second because Docker Compose starts ClickHouse, Qdrant, backend, and frontend together.",
+      "Live demo is currently exposed on the shared server at port 5174.",
       "Use mock fallback for public demo resilience when no LLM key is configured.",
       "Set a service token for MCP endpoints in any non-local deployment.",
     ],
@@ -142,8 +145,9 @@ export const projects: Project[] = [
     shortTitle: "E-Commerce Agent",
     summary:
       "Multi-service AI assistant for e-commerce operations with MCP business tools, approval-gated writes, analytics, charts, and sandboxed execution.",
-    status: "Starting soon",
+    status: "Live",
     demoPath: "/demos/ecommerce/",
+    demoUrl: "http://175.27.136.242:8010/",
     image: "/images/ecommerce-agent.svg",
     repos: [
       {
@@ -189,7 +193,7 @@ export const projects: Project[] = [
       "Verify that write execution fails without a valid approval.",
     ],
     deploymentNotes: [
-      "Deploy last because it requires MySQL seed data, Spring MCP, Python agent, Mongo, sandbox executor, and optional NL2SQL integration.",
+      "Live API/demo entry is currently exposed on the shared server at port 8010.",
       "Keep write actions approval-gated in public demos.",
       "Expose only the agent frontend/API; keep MySQL, Mongo, and MCP service ports private.",
     ],
@@ -197,11 +201,11 @@ export const projects: Project[] = [
 ];
 
 export const deploymentPhases = [
-  "Scaffold the Astro portfolio and publish static files through Nginx.",
-  "Provision Ubuntu with Docker, Docker Compose, Nginx, Certbot, firewall rules, and HTTPS.",
-  "Deploy Enterprise RAG, then NL2SQL, then the E-Commerce multi-service system.",
-  "Harden public demos with demo data, scoped secrets, internal health checks, and fallback screenshots.",
-  "Polish project pages with demo scripts, architecture diagrams, and deployment notes.",
+  "Publish the Astro portfolio and link to the live HTTP demo endpoints.",
+  "Run Enterprise RAG on port 5173, NL2SQL on port 5174, and E-Commerce Agent on port 8010.",
+  "Keep demo data, scoped secrets, and write approvals isolated from real data.",
+  "Add a domain, HTTPS, and Nginx reverse proxy when DNS is ready.",
+  "Replace SVG placeholders with real screenshots from the deployed demos.",
 ];
 
 export const statusRank: Record<DemoStatus, number> = {

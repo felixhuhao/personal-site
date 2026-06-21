@@ -67,6 +67,7 @@ code {
   background: var(--soft);
   padding: 0.12rem 0.35rem;
   font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 
 .site-header,
@@ -244,6 +245,7 @@ code {
 .map-row strong {
   color: var(--brand);
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .section {

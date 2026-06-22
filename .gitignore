@@ -4,4 +4,24 @@ dist/
 
 .DS_Store
 npm-debug.log*
-node_modules
+*:Zone.Identifier
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Local resume notes
+resume/raw.txt
+resume/experience-notes.md
+resume/chn/
+resume/sample/

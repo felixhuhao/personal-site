@@ -16,6 +16,10 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \linespread{1.04}
+% suppress automatic hyphenation (still allow breaks at explicit hyphens); keep justification clean
+\hyphenpenalty=10000
+\tolerance=2000
+\emergencystretch=2em
 \pagestyle{empty}
 
 % ---- fonts (TeX Gyre Heros = Helvetica-like) ----
@@ -49,7 +53,7 @@
   \vspace{4pt}%
 }
 \newcommand{\contact}[1]{%
-  {\centering\small #1\par}%
+  {\centering\normalsize #1\par}%
   \vspace{1pt}%
 }
 

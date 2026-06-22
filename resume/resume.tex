@@ -3,10 +3,10 @@
 \pagenumbering{gobble}
 
 \name{Hao Hu}
-\headline{AI \& Agentic Systems Engineer \,\textperiodcentered\, Staff-Level Engineering Leader}
-% Staff/platform-forward variant: \headline{Staff-Level Software Engineer \,\textperiodcentered\, Production AI \& Agentic Systems}
+% AI-forward headline variant: \headline{AI \& Agentic Systems Engineer \,\textperiodcentered\, Staff-Level Engineering Leader}
+% Staff/platform-forward headline variant: \headline{Staff-Level Software Engineer \,\textperiodcentered\, Production AI \& Agentic Systems}
 \contact{%
-  +86 133 8752 1087 \;\textperiodcentered\;
+  +1 (408) 593-4072 \;\textperiodcentered\;
   \href{mailto:felixhuhao@gmail.com}{felixhuhao@gmail.com} \;\textperiodcentered\;
   \href{https://github.com/felixhuhao}{github.com/felixhuhao} \;\textperiodcentered\;
   \href{https://felixhuhao.github.io}{felixhuhao.github.io}% TODO: confirm final site URL
@@ -16,7 +16,7 @@
 \cvsummary{\textbf{Staff-level software engineer} with 10+ years at Google, Uber, and Microsoft building large-scale distributed systems, data infrastructure, and platforms --- now applying that foundation to production AI/agentic systems as a startup CTO.}
 % pre-change: \cvsummary{\textbf{Builds AI that holds up in production} --- RAG, multi-agent, and MCP tool systems with deterministic guardrails, citation grounding, human-in-the-loop approval, and evaluation suites.}
 % pre-change: \cvsummary{\textbf{Builds production AI systems} --- RAG, AI data agents, and MCP/tool-using agents with deterministic guardrails, grounded refusal paths, human approval for risky actions, and golden-set regression evals.}
-\cvsummary{\textbf{Builds production AI systems} --- RAG, AI data analytics, and tool-using agents with deterministic guardrails, citation-grounded refusal, human approval for risky actions, and golden-set regression evals.}
+\cvsummary{\textbf{Production AI / agentic systems builder} --- RAG, AI data analytics, and tool-using agents with deterministic guardrails, citation-grounded refusal, human approval for risky actions, and golden-set regression evals.}
 \cvsummary{\textbf{Hands-on engineering leader} with strong CS fundamentals and architecture judgment --- leads small teams from architecture through delivery, using spec-driven AI-assisted workflows to ship faster without sacrificing reliability.}
 
 \cvsection{Technical Skills}
@@ -28,8 +28,8 @@
 \cvskill{AI-Native Engineering}{spec-driven development, AI-assisted implementation, TDD / validation, review-gated output, harness engineering, Claude Code / Codex / Cursor / OpenCode}
 \cvskill{RAG \& Retrieval}{RAG (multimodal), hybrid retrieval, embeddings, reranking, query optimization, Milvus, Qdrant}
 \cvskill{Evaluation \& Safety}{eval harnesses, golden-set regression, RAGAS, LLM-as-judge, guardrails, human-in-the-loop}
-\cvskill{Inference \& ML}{PyTorch, vLLM, SGLang, Ollama, Hugging Face, XGBoost / LightGBM / CatBoost}
-\cvskill{Languages}{Java, Go, Python, SQL, C++, C\#}
+\cvskill{Inference \& ML}{PyTorch, Transformers, vLLM, SGLang, Ollama, Hugging Face, XGBoost / LightGBM / CatBoost}
+\cvskill{Programming Languages}{Java, Go, Python, SQL, C++, C\#}
 \cvskill{Backend \& Distributed Systems}{microservices, API design, gRPC / Protobuf, REST, Thrift, Spring AI, FastAPI, SSE}
 \cvskill{Data Systems}{data modeling, CDC, PostgreSQL, MySQL, Redis, BigQuery, Kafka, Flink, ClickHouse, MongoDB}
 \cvskill{Cloud \& Platform}{Google Cloud (Cloud SQL, GCE, GCS), Docker, Kubernetes, CI/CD, observability}
@@ -52,21 +52,23 @@
   % \item \textbf{Knowledge assistant}: \textbf{RAG} over enterprise documents (\textbf{LangGraph}, \textbf{Milvus}) with intent-driven strategies (balanced / exact / broad), citation-grounded answers and strict-evidence refusal, and a feedback-driven golden set (user thumbs-up/down $\rightarrow$ regression cases) for continuous quality.
   % ===== INTEGRATED VERSION =====
   % pre-trim: \item \textbf{Architected and shipped a unified ERP AI layer} spanning operations, analytics, and knowledge: specialist agents share an evaluation-first practice with golden sets, regression suites, least-privilege tools, and human approval for risky actions.
-  \item \textbf{Architected and shipped a unified ERP AI layer} spanning operations, analytics, and knowledge, built on an evaluation-first practice: golden sets, regression suites, least-privilege tools, and human approval for risky actions.
-  \item \textbf{Operations Copilot}: built a \textbf{DeepAgents}-based agent harness over ERP entities (product / inventory / order / supplier / PO), using governed \textbf{MCP} tools and a Spring Boot / Spring AI server to enforce approval-gated writes.
-  \item \textbf{Analytics Agent}: delivered self-service NL-to-SQL over the ERP \textbf{ClickHouse} warehouse, backed by a \textbf{Qdrant} semantic layer, deterministic \textbf{SQLGlot} guardrails, scoped read-only execution, and bounded SQL repair.
+  \item \textbf{Architected and shipped a unified AI layer for an ERP SaaS platform} across operations, analytics, and knowledge; established shared eval/safety practices: golden sets, regression suites, least-privilege tools, and approval gates.
+  \item \textbf{Operations Copilot}: built a \textbf{DeepAgents}-based agent harness over ERP entities (product / inventory / order / supplier / PO), using role-scoped \textbf{MCP} tools, specialist delegation, sandbox-isolated execution, auditable tool traces, and a \textbf{Spring AI / Java 21} server with human-in-the-loop approval for risky writes.
+  \item \textbf{Analytics Agent}: delivered self-service NL-to-SQL over the ERP \textbf{ClickHouse} warehouse, backed by a \textbf{Qdrant} semantic layer that cut prompt context \textbf{73.2\%} via focused retrieval; enforced deterministic \textbf{SQLGlot} guardrails, scoped read-only execution, bounded SQL repair, and result-equivalence / safety regression evals.
   % pre-curation: \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated RAG over enterprise documents with \textbf{Milvus} hybrid retrieval and intent-specific pipelines; improved answer quality through query expansion, HyDE, RRF/rerank, context expansion, a retrieval test bench, and golden-set feedback loops, while enforcing citation grounding and strict-evidence refusal.
-  \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated RAG over enterprise documents with \textbf{Milvus} hybrid retrieval and intent-specific pipelines; lifted answer quality with query expansion, HyDE, RRF/rerank, a retrieval test bench, and golden-set feedback loops, while enforcing citation grounding and strict-evidence refusal.
+  \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated enterprise-document RAG with multi-source ingestion and \textbf{Milvus} hybrid retrieval; supported strategy-aware retrieval (precise / balanced / broad), query expansion, HyDE, RRF/rerank, and a retrieval test bench while enforcing citation grounding and strict-evidence refusal.
 \end{itemize}
 
 \cventry{Uber}{May 2022 -- Mar 2023}{Senior Software Engineer}{Toronto, ON}
 \begin{itemize}
   % pre-curation: \item \textbf{Built Uber's first CPG (consumer-packaged-goods) Ads feature --- storefront banner ads} --- as backend lead on a 3-person team, delivering a new backbone microservice bridging the UberEats storefront and the Uber Ads platform so advertisers budget and run creative ads for chosen items at chosen brands across cities and countries; \textbf{scaled to \textasciitilde250K QPS at 180\,ms p99} within a quarter and onboarded marquee CPG advertisers (Coca-Cola, Red Bull). (Go, gRPC / Thrift, DocStore.)
-  \item \textbf{Built Uber's first CPG (consumer-packaged-goods) Ads feature --- storefront banner ads} --- as backend lead on a 3-person team, delivering a backbone microservice bridging the UberEats storefront and the Uber Ads platform so advertisers run budgeted creative for chosen items and brands across markets; \textbf{scaled to \textasciitilde250K QPS at 180\,ms p99} within a quarter and onboarded marquee advertisers (Coca-Cola, Red Bull). (Go, gRPC / Thrift, DocStore.)
-  \item \textbf{Redesigned the ad-campaign data model for CPG scale}: replaced the restaurant-era single-location, item-ID-keyed model --- which needed thousands of entries and a 4-person service team to run one national campaign --- with a GTIN-keyed model (Global Trade Item Number) bundling brand, city, and country, eliminating millions of duplicate campaign entries and the manual scaling burden for sales.
+  % pre-enrich: \item \textbf{Built Uber's first CPG (consumer-packaged-goods) Ads feature --- storefront banner ads}: led backend delivery on a 3-person team, building a Go/gRPC/Thrift backbone between the UberEats storefront and Uber Ads so advertisers like Coca-Cola and Red Bull could run budgeted item/brand campaigns across markets; \textbf{scaled to \textasciitilde250K QPS at 180\,ms p99}.
+  \item \textbf{Built Uber's first CPG (consumer-packaged-goods) Ads feature --- storefront banner ads}: led backend delivery on a 3-person team, building a Go/gRPC/Thrift backbone service backed by DocStore between the UberEats storefront and Uber Ads so advertisers like Coca-Cola and Red Bull could run item/brand campaigns across retail chains; \textbf{scaled to \textasciitilde250K QPS at \textasciitilde140\,ms p99} in its first quarter.
+  \item \textbf{Redesigned the CPG ad-campaign data model}: replaced restaurant-era single-location item IDs with a GTIN-keyed model bundling brand, city, and country, enabling national campaigns while eliminating millions of duplicate campaign entries and manual sales-ops burden.
   % pre-curation: \item \textbf{Launched store-menu sponsored items} via a third-party ad integration: as Ads-team dev representative, sourced sponsor candidates from the provider, prioritized sponsored items in storefront sub-menus, and streamed view/click/purchase signals back for billing through a Kafka + Flink pipeline --- solving the integration, performance, and monitoring challenges.
-  \item \textbf{Launched store-menu sponsored items} via a third-party ad integration: as Ads-team dev representative, sourced sponsor candidates, prioritized sponsored items in storefront sub-menus, and streamed view/click/purchase signals back for billing through a Kafka + Flink pipeline.
-  \item \textbf{Served as central dev representative} across data scientists, sales, DevOps, partner teams, and the third-party provider, and built monitoring and alerting (Prometheus / Grafana) into both launches.
+  % pre-enrich: \item \textbf{Launched store-menu sponsored items} via a third-party ad integration: represented Ads across data science, sales, DevOps, partner teams, and the provider; prioritized sponsored items in storefront sub-menus, streamed view/click/purchase signals for Kafka + Flink billing, and built Prometheus / Grafana monitoring.
+  \item \textbf{Launched store-menu sponsored items} by extending the CPG Ads backbone into a third-party ad integration: ranked sponsored items in storefront sub-menus and streamed impression/click events through a Kafka + Flink billing pipeline; \textbf{held \textasciitilde180\,ms p99} with the external provider in the request path, backed by Prometheus / Grafana monitoring and dependency alerting.
+  \item \textbf{Drove the staged production rollout of CPG Ads} and served as the Ads team's dev representative --- aligning data science, sales, DevOps, partner teams, and the external ad provider.
 \end{itemize}
 
 \cventry{Google}{Feb 2018 -- Feb 2021}{Software Engineer --- Cloud SQL (Data Integration / Disaster Recovery)}{Sunnyvale, CA}

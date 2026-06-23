@@ -19,6 +19,7 @@ npm-debug.log*
 *.synctex.gz
 *.toc
 *.xdv
+resume/*.pdf
 
 # Local resume notes
 resume/raw.txt

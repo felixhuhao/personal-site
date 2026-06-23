@@ -1,4 +1,4 @@
-\documentclass{resume}
+\documentclass{resume-v2}
 \begin{document}
 \pagenumbering{gobble}
 
@@ -11,29 +11,34 @@
   \href{https://github.com/felixhuhao}{github.com/felixhuhao}%
 }
 
-\vspace{-4pt}\cvsection{Summary}
-\cvsummary{\textbf{Staff-level software engineer} with 10+ years at Google, Uber, and Microsoft building large-scale distributed systems, data infrastructure, and platforms --- now applying that foundation to production AI/agentic systems as a startup CTO.}
+% pre-v2-tighten: \vspace{-4pt}\cvsection{Summary}
+\vspace{-8pt}\cvsection{Summary}
+% pre-change: \cvsummary{\textbf{Staff-level software engineer} with 10+ years at Google, Uber, and Microsoft building large-scale distributed systems, data infrastructure, and platforms --- now applying that foundation to production AI/agentic systems as a startup CTO.}
+\cvsummary{\textbf{Senior backend engineer with deep CS fundamentals and architecture judgment, now an AI-focused CTO} --- 10+~years at Google, Uber, and Microsoft building large-scale distributed systems and data infrastructure.}
 % pre-change: \cvsummary{\textbf{Builds AI that holds up in production} --- RAG, multi-agent, and MCP tool systems with deterministic guardrails, citation grounding, human-in-the-loop approval, and evaluation suites.}
 % pre-change: \cvsummary{\textbf{Builds production AI systems} --- RAG, AI data agents, and MCP/tool-using agents with deterministic guardrails, grounded refusal paths, human approval for risky actions, and golden-set regression evals.}
 % previous-active: \cvsummary{\textbf{Production AI / agentic systems builder} --- RAG, conversational analytics, and multi-agent MCP orchestration with deterministic guardrails, citation-grounded refusal, human approval for risky actions, and golden-set regression evals.}
 \cvsummary{\textbf{Production AI / agentic systems builder} --- RAG, conversational analytics, and MCP-backed multi-agent workflows with observability, context/cost controls, deterministic guardrails, human approval for risky actions, and regression evals.}
 % previous-active: \cvsummary{\textbf{Hands-on engineering leader} with strong CS fundamentals and architecture judgment --- leads small teams from architecture through delivery, using spec-driven AI-assisted workflows to ship faster without sacrificing reliability.}
-\cvsummary{\textbf{Hands-on engineering leader} with strong CS fundamentals and architecture judgment --- leads small teams from design through delivery, using spec-driven, review-gated AI workflows to ship faster without sacrificing reliability.}
+% pre-Q3-trim: \cvsummary{\textbf{Hands-on engineering leader} with strong CS fundamentals and architecture judgment --- leads small teams from design through delivery, using spec-driven, review-gated AI workflows to ship faster without sacrificing reliability.}
+% pre-enrich: \cvsummary{\textbf{Hands-on engineering leader} --- leads small teams from design through delivery, using spec-driven, review-gated AI workflows to ship faster without sacrificing reliability.}
+\cvsummary{\textbf{Hands-on engineering leader} --- leads small teams from design through delivery, using spec-driven, review-gated AI-assisted workflows with automated tests and evals to ship faster without sacrificing reliability.}
 
 \cvsection{Technical Skills}
 % pre-change (8-cat version):
 % \cvskill{LLM \& Agents}{LangChain, LangGraph, DeepAgents, MCP, multi-agent orchestration, tool calling, agent harnesses}
 % \cvskill{RAG \& Retrieval}{RAG (multimodal), hybrid retrieval, reranking, Milvus, Qdrant}
 % \cvskill{Evaluation \& Safety}{RAGAS, golden-set \& regression evals, guardrails, human-in-the-loop, deterministic guards}
-\cvskill{LLM \& Agents}{agent orchestration, tool / function calling, MCP integration, workflow/state graphs, multi-agent routing, context engineering / memory, LangChain / LangGraph / DeepAgents, OpenAI / Claude / DeepSeek}
-\cvskill{AI-Native Engineering}{spec-driven development, AI-assisted implementation, TDD / validation, review-gated output, harness engineering, Claude Code / Codex / Cursor / OpenCode}
+% pre-Q8: removed \cvskill{AI-Native Engineering}{spec-driven development, AI-assisted implementation, TDD / validation, review-gated output, harness engineering, Claude Code / Codex / Cursor / OpenCode}  (identity carried by Summary L3)
+% pre-Q9: removed \cvskill{Inference \& ML}{PyTorch, Transformers, vLLM, SGLang, Ollama, Hugging Face, XGBoost / LightGBM / CatBoost}  (rebuild later once vLLM/SGLang/Ollama learned in depth)
+\cvskill{LLM \& Agents}{agent orchestration, agent harnesses, tool / function calling, MCP integration, multi-agent routing, context engineering / memory, LangChain / LangGraph / DeepAgents, OpenAI / Claude / DeepSeek}
 \cvskill{RAG \& Retrieval}{RAG (multimodal), hybrid retrieval, embeddings, reranking, query optimization, Milvus, Qdrant}
-\cvskill{Evaluation \& Safety}{eval harnesses, golden-set regression, RAGAS, LLM-as-judge, guardrails, human-in-the-loop}
-\cvskill{Inference \& ML}{PyTorch, Transformers, vLLM, SGLang, Ollama, Hugging Face, XGBoost / LightGBM / CatBoost}
-\cvskill{Programming Languages}{Java, Go, Python, SQL, C++, C\#}
+\cvskill{Evaluation \& Safety}{LangSmith, RAGAS, eval harnesses, LLM-as-judge, guardrails, human-in-the-loop}
+% pre-Q10: \cvskill{Programming Languages}{Java, Go, Python, SQL, C++, C\#}
+\cvskill{Programming Languages}{Java \& Go \textbf{(Google-certified)}, Python, SQL, C++, C\#}
 \cvskill{Backend \& Distributed Systems}{microservices, API design, gRPC / Protobuf, REST, Thrift, Spring AI, FastAPI, SSE}
 \cvskill{Data Systems}{data modeling, CDC, PostgreSQL, MySQL, Redis, BigQuery, Kafka, Flink, ClickHouse, MongoDB}
-\cvskill{Cloud \& Platform}{Google Cloud (Cloud SQL, GCE, GCS), Docker, Kubernetes, CI/CD, observability}
+\cvskill{Cloud \& Platform}{Google Cloud, AWS, Docker, Kubernetes, Linux, Nginx, CI/CD}
 %\cvskill{Certifications}{Google Java \& Go}
 
 \cvsection{Experience}
@@ -53,16 +58,24 @@
   % \item \textbf{Knowledge assistant}: \textbf{RAG} over enterprise documents (\textbf{LangGraph}, \textbf{Milvus}) with intent-driven strategies (balanced / exact / broad), citation-grounded answers and strict-evidence refusal, and a feedback-driven golden set (user thumbs-up/down $\rightarrow$ regression cases) for continuous quality.
   % ===== INTEGRATED VERSION =====
   % pre-trim: \item \textbf{Architected and shipped a unified ERP AI layer} spanning operations, analytics, and knowledge: specialist agents share an evaluation-first practice with golden sets, regression suites, least-privilege tools, and human approval for risky actions.
-  \item \textbf{Architected and shipped a unified AI layer for an ERP SaaS platform} across operations, analytics, and knowledge; established shared eval/safety practices: golden sets, regression suites, least-privilege tools, and approval gates.
+  \item \textbf{Architected and shipped a unified AI layer for an ERP SaaS platform} across operations, analytics, and knowledge; established shared eval/safety practices: observability, golden sets, regression suites, and least-privilege tools.
   \item \textbf{Operations Copilot}: built a \textbf{DeepAgents}-based agent harness with delegated specialists (sales / inventory / order / purchasing), using role-scoped \textbf{MCP} tools, sandboxed execution, proactive monitoring, auditable tool traces, and a \textbf{Spring AI / Java 21} server with human-in-the-loop approval for risky writes (cryptographically bound, single-use).
-  \item \textbf{Analytics Agent}: delivered self-service, multi-turn NL-to-SQL over the ERP \textbf{ClickHouse} warehouse, backed by a \textbf{Qdrant} semantic layer that cut prompt context \textbf{\textasciitilde75\%}; added OLAP intent detection and auto-charting, with deterministic \textbf{SQLGlot} guardrails, read-only execution, bounded SQL repair, and result-equivalence regression evals.
+  \item \textbf{Analytics Agent}: delivered self-service, multi-turn NL-to-SQL over the ERP \textbf{ClickHouse} warehouse, backed by a \textbf{Qdrant} semantic layer that cut prompt context \textbf{\textasciitilde75\%}; added OLAP intent routing, deterministic \textbf{SQLGlot} guardrails, read-only execution, bounded SQL repair, result-equivalence regression evals, and auto-charting.
   % pre-curation: \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated RAG over enterprise documents with \textbf{Milvus} hybrid retrieval and intent-specific pipelines; improved answer quality through query expansion, HyDE, RRF/rerank, context expansion, a retrieval test bench, and golden-set feedback loops, while enforcing citation grounding and strict-evidence refusal.
-  \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated enterprise-document RAG with multi-source ingestion and \textbf{Milvus} hybrid retrieval; classified query intent to route precise / balanced / broad retrieval strategies with query expansion, HyDE, and RRF/rerank while enforcing citation grounding, strict-evidence refusal, and role-based access control; evaluated via a golden-set harness (LLM-judge + citation/numeric scorers) and per-query observability.
+  % pre-tighten: \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated enterprise-document RAG with multi-source ingestion and \textbf{Milvus} hybrid retrieval; classified query intent to route precise / balanced / broad retrieval strategies with query expansion, HyDE, and RRF/rerank while enforcing citation grounding, strict-evidence refusal, and role-based access control; evaluated via a golden-set harness (LLM-judge + citation/numeric scorers) and per-query observability.
+  % pre-HyDE-trim: \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated enterprise-document RAG with multi-source ingestion and \textbf{Milvus} hybrid retrieval; routed precise / balanced / broad strategies with query expansion, HyDE, and RRF/rerank while enforcing citation grounding, strict-evidence refusal, and role-based access control; added golden-set evals and per-query observability.
+  \item \textbf{Knowledge Assistant}: delivered \textbf{LangGraph}-orchestrated enterprise-document RAG with multi-source ingestion and \textbf{Milvus} hybrid retrieval; routed precise / balanced / broad strategies with query expansion and rerank, enforcing citation grounding, strict-evidence refusal, and RBAC; added LLM-judge/citation evals and per-query observability.
 \end{itemize}
 
-\cventry{Independent}{Mar 2023 -- Jan 2025}{Technology Consultant}{Wuhan, China}
+% pre-Q1: \cventry{Independent}{Mar 2023 -- Jan 2025}{Technology Consultant}{...} + AI/ML consulting bullet
+\cventry{Independent}{Mar 2023 -- Jan 2025}{Independent Software Engineer \& Consultant}{Wuhan, China}
 \begin{itemize}
-  \item \textbf{Provided AI/ML technical consulting} for local companies and colleges --- advised on technology strategy, architecture, and AI adoption during the transition back to China.
+  % pre-trim(3->2 lines): ...audio/video POI guides with GPS, plus trip planning --- on AWS (EC2/Docker, RDS Postgres, S3, CloudWatch) and Vercel; ... bridging into the Yuanbao CTO role.
+  % pre-split: \item \textbf{Built and deployed a cloud-native travel-guide SaaS} featuring audio/video POI guides with GPS and trip planning, on AWS (EC2/Docker, RDS Postgres, S3) and Vercel; \textbf{later deepened} agentic-AI work, bridging into the CTO role.
+  % pre-enrich: \item \textbf{Built and deployed a cloud-native travel-guide SaaS} featuring audio/video POI guides with GPS and trip planning, on AWS (EC2/Docker, RDS Postgres, S3) and Vercel.
+  \item \textbf{Built and deployed a cloud-native travel-guide SaaS} featuring user-uploaded audio/video POI guides with Google Maps-assisted GPS and trip planning, on AWS (EC2/Docker, RDS Postgres, S3, CloudWatch) and Vercel.
+  % pre-trim: \item \textbf{Deepened production-AI engineering practice} through agentic-AI prototypes and applied learning, bridging into the CTO role.
+  \item \textbf{Deepened production-AI practice} through RAG/agent prototypes and applied learning, bridging into the CTO role.
 \end{itemize}
 
 \cventry{Uber}{May 2022 -- Mar 2023}{Senior Software Engineer}{Toronto, ON}
@@ -76,7 +89,8 @@
   % pre-curation: \item \textbf{Launched store-menu sponsored items} via a third-party ad integration: as Ads-team dev representative, sourced sponsor candidates from the provider, prioritized sponsored items in storefront sub-menus, and streamed view/click/purchase signals back for billing through a Kafka + Flink pipeline --- solving the integration, performance, and monitoring challenges.
   % pre-enrich: \item \textbf{Launched store-menu sponsored items} via a third-party ad integration: represented Ads across data science, sales, DevOps, partner teams, and the provider; prioritized sponsored items in storefront sub-menus, streamed view/click/purchase signals for Kafka + Flink billing, and built Prometheus / Grafana monitoring.
   % pre-B3-value: \item \textbf{Launched store-menu sponsored items} by extending the CPG Ads backbone into a third-party ad integration: ranked sponsored items in storefront sub-menus and streamed impression/click events through a Kafka + Flink billing pipeline; \textbf{held \textasciitilde180\,ms p99} with the external provider in the request path, backed by Prometheus / Grafana monitoring and dependency alerting.
-  \item \textbf{Launched store-menu sponsored items} by extending the CPG Ads backbone into a third-party ad integration: ranked sponsored items in storefront sub-menus and streamed impression/click events through a Kafka + Flink pipeline into Pinot for billing; \textbf{held \textasciitilde180\,ms p99} with the external provider inline, backed by Prometheus / Grafana monitoring and dependency alerting to separate Uber-side from provider-side latency, errors, and traffic spikes.
+  % pre-tighten: \item \textbf{Launched store-menu sponsored items} by extending the CPG Ads backbone into a third-party ad integration: ranked sponsored items in storefront sub-menus and streamed impression/click events through a Kafka + Flink pipeline into Pinot for billing; \textbf{held \textasciitilde180\,ms p99} with the external provider inline, backed by Prometheus / Grafana monitoring and dependency alerting to separate Uber-side from provider-side latency, errors, and traffic spikes.
+  \item \textbf{Launched store-menu sponsored items} by extending the CPG Ads backbone into a third-party ad integration: ranked sponsored items in storefront sub-menus, streamed impression/click events through a Kafka + Flink billing pipeline, and \textbf{held \textasciitilde180\,ms p99} with Prometheus / Grafana monitoring and dependency alerting.
   \item \textbf{Drove the staged production rollout of CPG Ads} and served as the Ads team's dev representative --- aligning product, data science, sales, DevOps, partner teams, and the external ad provider.
 \end{itemize}
 
@@ -115,7 +129,8 @@
   % pre-role-clarify: \item \textbf{Built a distributed C++ profiling tool for the Hotmail / Outlook.com-to-Exchange migration}: scanned the 2.2B-account legacy base to select the 400M+ active accounts to migrate, storing account characteristics so the selector could stage cutovers and close 40+ feature gaps.
   \item \textbf{Built a distributed C++ profiling tool that drove account selection for the Hotmail / Outlook.com-to-Exchange migration}: profiled feature usage across the 2.2B-account base, surfaced 40+ feature gaps, identified 400M+ migration-ready accounts, and re-profiled as gaps closed for successive migration waves.
   % pre-expand: \item \textbf{Built monitoring for People Relevance}: real-time alerting, performance counters, and log-aggregation dashboards.
-  \item \textbf{Built monitoring for People Relevance}: real-time alerting, performance counters, and log-aggregation dashboards that gave the team operational visibility for faster debugging and on-call response.
+  % pre-Q13: ...dashboards that gave the team operational visibility for faster debugging and on-call response.
+  \item \textbf{Built monitoring for People Relevance}: real-time alerting, performance counters, and log-aggregation dashboards that became the team's first-line signal for production health, improving triage and on-call response.
   % pre-trim: \item \textbf{Served on the on-call rotation throughout}, investigating and resolving release-blocking and customer-escalated issues promptly.
   \item \textbf{Supported Outlook production reliability}: served on-call across Hotmail / Outlook services, resolving release-blocking incidents and customer-escalated issues, and driving fixes into production.
 \end{itemize}
@@ -128,11 +143,13 @@
   % pre-scm-reframe: \item \textbf{Built and extended EMC2}, Epic's internal dev-management platform (VB.NET on InterSystems Caché) --- an early CI/CD system spanning source control, code-change tracking, deployment, and component dependency management (reference updates, dependency resolution, pre-commit/server-compile tracking).
   % previous-active: \item \textbf{Built and extended EMC2}, Epic's internal software configuration management (SCM) platform (VB.NET on InterSystems Caché) --- version control, automated builds (pre-commit validation and server compile), dependency management (reference updates and resolution), and release/deployment.
   % pre-trim(3->2): \item \textbf{Built and extended EMC2}: Epic's internal software configuration management platform (VB.NET on InterSystems Caché) for version control, automated builds (pre-commit validation and server compile), dependency management (reference updates and resolution), and automated deployment.
-  \item \textbf{Built and extended EMC2}: Epic's internal software configuration management platform (VB.NET on InterSystems Caché) for version control, dependency management, and automated build and deployment.
+  % pre-Q14: ...for version control, dependency management, and automated build and deployment.
+  \item \textbf{Built and extended EMC2}: Epic's internal software configuration management platform (VB.NET on InterSystems Caché) for version control, dependency management, and automated build and deployment --- an early CI/CD system.
   % pre-improve: \item \textbf{Developed customer release and upgrade utilities} (console and web) for software upgrades and version checks, streamlining how customers kept their deployments current.
   \item \textbf{Developed customer release and upgrade utilities} (console and web) that automated version checks and pushed updates over a secure communication framework, keeping health systems on current, supported versions.
   % pre-improve: \item \textbf{Provided developer enablement and escalation support}, unblocking development and deployment issues and delivering a Trial Dev Environment service built on a multi-way merge for safe change validation.
-  \item \textbf{Resolved escalations} that unblocked developers on build, integration, and deployment, and supported and extended a Trial Dev Environment that let teams safely integrate high-risk changes without destabilizing mainline.
+  % pre-Q12: \item \textbf{Resolved escalations} that unblocked developers on build, integration, and deployment, and supported and extended a Trial Dev Environment that let teams safely integrate high-risk changes without destabilizing mainline.
+  \item \textbf{Built and extended a Trial Dev Environment} that let teams safely integrate high-risk changes without destabilizing mainline, and resolved build / integration / deployment escalations.
   % \item \textbf{Trained clinicians on-site}, teaching physicians and nurses to use Epic software at hospital frontlines.
 \end{itemize}
 

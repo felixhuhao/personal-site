@@ -12,101 +12,50 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 ---
 
-<BaseLayout title={`${project.title} - Hao Hu`} description={project.summary}>
-  <section class="project-hero">
-    <div class="project-hero-copy">
-      <a class="back-link" href="/#projects">Back to projects</a>
-      <div class="card-title-row">
-        <h1>{project.title}</h1>
-        <span class={`status status-${project.status.toLowerCase().replaceAll(" ", "-")}`}>
-          {project.status}
-        </span>
-      </div>
+<BaseLayout title={`${project.title} — ${"Hao Hu"}`} description={project.summary}>
+  <section class="wrap detail-hero">
+    <div>
+      <a class="back-link" href="/#projects">← Back to projects</a>
+      <p class="eyebrow">{project.kicker}</p>
+      <h1>{project.title}</h1>
       <p>{project.summary}</p>
       <div class="hero-actions">
-        <a class="button button-primary" href={project.demoUrl}>Open live demo</a>
-        <a class="button button-secondary" href={project.repos[0].url}>View source</a>
+        {project.demoUrl && <a class="btn btn-primary" href={project.demoUrl}>Live demo</a>}
+        <a class="btn btn-ghost" href={project.repos[0].url}>View source</a>
       </div>
     </div>
-    <img class="project-hero-image" src={project.image} alt={`${project.shortTitle} interface preview`} />
+    <img class="detail-img" src={project.image} alt={`${project.shortTitle} preview`} />
   </section>
 
-  <section class="section detail-grid">
-    <article>
-      <p class="eyebrow">Architecture</p>
+  <section class="section wrap">
+    <div class="panel" style="margin-bottom:18px">
       <h2>How it works</h2>
-      <p>{project.architecture}</p>
-      <div class="tag-row wide">
-        {project.stack.map((item) => <span>{item}</span>)}
+      <p class="muted">{project.architecture}</p>
+      <div class="tag-row" style="margin-top:14px">
+        {project.stack.map((t) => <span class="tag">{t}</span>)}
       </div>
-    </article>
-
-    <article>
-      <p class="eyebrow">Demo</p>
-      <h2>Access</h2>
-      <p>
-        Live endpoint: <a href={project.demoUrl}>{project.demoUrl}</a>
-      </p>
-      <p class="muted-copy">
-        Fallback page: <a href={project.demoPath}>{project.demoPath}</a>
-      </p>
-      {
-        project.credentials ? (
-          <div class="credential-list">
-            {project.credentials.map((credential) => (
-              <div class="credential-row">
-                <strong>{credential.username}</strong>
-                <code>{credential.password}</code>
-                <span>{credential.note}</span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p class="muted-copy">No public credentials are needed for the first demo path.</p>
-        )
-      }
-    </article>
-  </section>
-
-  <section class="section columns-three">
-    <article>
-      <p class="eyebrow">Capabilities</p>
-      <h2>What it shows</h2>
-      <ul class="check-list">
-        {project.capabilities.map((item) => <li>{item}</li>)}
-      </ul>
-    </article>
-    <article>
-      <p class="eyebrow">Proof</p>
-      <h2>Evidence</h2>
-      <ul class="check-list">
-        {project.proof.map((item) => <li>{item}</li>)}
-      </ul>
-    </article>
-    <article>
-      <p class="eyebrow">Try this</p>
-      <h2>Demo script</h2>
-      <ul class="check-list">
-        {project.tryThis.map((item) => <li>{item}</li>)}
-      </ul>
-    </article>
-  </section>
-
-  <section class="section split-section">
-    <div>
-      <p class="eyebrow">Deployment</p>
-      <h2>Remote rollout notes</h2>
     </div>
-    <ul class="check-list">
-      {project.deploymentNotes.map((item) => <li>{item}</li>)}
-    </ul>
-  </section>
 
-  <section class="section">
-    <p class="eyebrow">Source</p>
-    <h2>Repositories</h2>
-    <div class="repo-list">
-      {project.repos.map((repo) => <a href={repo.url}>{repo.label}</a>)}
+    <div class="detail-cols">
+      <div class="panel">
+        <h2>Capabilities</h2>
+        <ul class="check">{project.capabilities.map((c) => <li>{c}</li>)}</ul>
+      </div>
+      <div class="panel">
+        <h2>Evidence</h2>
+        <ul class="check">{project.proof.map((c) => <li>{c}</li>)}</ul>
+      </div>
+      <div class="panel">
+        <h2>Try this</h2>
+        <ul class="check">{project.tryThis.map((c) => <li>{c}</li>)}</ul>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <h2>Source</h2>
+      <div class="repo-row">
+        {project.repos.map((r) => <a href={r.url}>{r.label}</a>)}
+      </div>
     </div>
   </section>
 </BaseLayout>

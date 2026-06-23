@@ -68,7 +68,7 @@
 
 % ---- experience entry: {company}{dates}{role}{location} ----
 \newcommand{\cventry}[4]{%
-  \ifcv@firstentry\cv@firstentryfalse\else\vspace{5pt}\fi
+  \ifcv@firstentry\cv@firstentryfalse\else\vspace{3pt}\fi
   {\bfseries #1}\hfill{\bfseries #2}\par
   {\itshape #3}\hfill{\itshape\color{muted} #4}\par
   \vspace{1pt}%
@@ -84,8 +84,8 @@
 
 % ---- skills line: {category}{items} ----
 \newcommand{\cvskill}[2]{%
-  \textbf{#1:} #2\par\vspace{2pt}%
+  \textbf{#1:} #2\par\vspace{1.5pt}%
 }
 
 % ---- summary line ----
-\newcommand{\cvsummary}[1]{#1\par\vspace{2pt}}
+\newcommand{\cvsummary}[1]{#1\par\vspace{1.5pt}}

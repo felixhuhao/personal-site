@@ -1,86 +1,165 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { deploymentPhases, projects } from "../data/projects";
-
-const orderedProjects = projects;
+import { projects } from "../data/projects";
+import { profile, about, experience, skills, labProjects } from "../data/profile";
 ---
 
 <BaseLayout>
-  <section class="hero-section">
-    <div class="hero-copy">
-      <p class="eyebrow">Portfolio and demo hub</p>
-      <h1>Production-shaped AI agent projects</h1>
-      <p class="hero-text">
-        Three systems showing retrieval, guarded analytics, MCP tooling,
-        approval flows, evaluation, and deployment-ready service boundaries.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="#projects">View projects</a>
-        <a class="button button-secondary" href="/roadmap/">Deployment roadmap</a>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">{profile.role} · {profile.tagline}</p>
+        <h1>Production <span class="grad">AI & agentic systems</span> — built to be trusted.</h1>
+        <p class="hero-lead">{profile.heroLead}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn btn-ghost" href={profile.resumeUrl}>Résumé (PDF)</a>
+          <a class="btn btn-ghost" href={profile.github}>GitHub</a>
+        </div>
+        <div class="hero-meta">
+          <span>{profile.location}</span>
+          <span>{profile.email}</span>
+        </div>
       </div>
-    </div>
-    <div class="hero-panel" aria-label="Deployment overview">
-      <div class="map-row">
-        <span>Static site</span>
-        <strong>Portfolio build</strong>
+      <div class="stat-panel">
+        {
+          profile.stats.map((s) => (
+            <div class="stat-row">
+              <span class="stat-num">
+                {s.accent ? <span class="accent">{s.accent}</span> : s.num}
+              </span>
+              <span class="stat-label">{s.label}</span>
+            </div>
+          ))
+        }
       </div>
-      {
-        orderedProjects.map((project) => (
-          <div class="map-row">
-            <span>{project.shortTitle}</span>
-            <strong>{project.demoUrl.replace("http://", "")}</strong>
-          </div>
-        ))
-      }
     </div>
   </section>
 
-  <section class="section" id="projects">
-    <div class="section-heading">
-      <p class="eyebrow">Selected work</p>
-      <h2>Project systems</h2>
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">About</p><h2>Leader who builds.</h2></div>
+      <div class="about-grid">
+        <div>
+          {about.paragraphs.map((p) => <p set:html={p} />)}
+        </div>
+        <div class="pillars">
+          {about.pillars.map((pl) => (
+            <div class="pillar"><h3>{pl.title}</h3><p>{pl.body}</p></div>
+          ))}
+        </div>
+      </div>
     </div>
-    <div class="project-grid">
-      {
-        orderedProjects.map((project) => (
-          <article class="project-card">
-            <a class="project-image-link" href={`/projects/${project.slug}/`}>
-              <img src={project.image} alt={`${project.shortTitle} interface preview`} loading="lazy" />
-            </a>
-            <div class="project-card-body">
-              <div class="card-title-row">
-                <h3>{project.shortTitle}</h3>
-                <span class={`status status-${project.status.toLowerCase().replaceAll(" ", "-")}`}>
-                  {project.status}
-                </span>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Selected work</p>
+        <h2>One ERP AI layer: knowledge, analytics, operations.</h2>
+        <p>
+          Three production systems built for an enterprise ERP client — an operations
+          copilot that delegates analytics and retrieval to specialized agents.
+        </p>
+      </div>
+      <div class="proj-grid">
+        {
+          projects.map((p) => (
+            <article class="card">
+              <a class="card-media" href={`/projects/${p.slug}/`}>
+                <img src={p.image} alt={`${p.shortTitle} preview`} loading="lazy" />
+              </a>
+              <div class="card-body">
+                <span class="card-kicker">{p.kicker}</span>
+                <h3>{p.title}</h3>
+                <p>{p.summary}</p>
+                <div class="tag-row">{p.stack.slice(0, 4).map((t) => <span class="tag">{t}</span>)}</div>
+                <div class="card-links">
+                  <a href={`/projects/${p.slug}/`}>Case study →</a>
+                  {p.demoUrl && <a href={p.demoUrl}>Live demo</a>}
+                </div>
               </div>
-              <p>{project.summary}</p>
-              <div class="tag-row">
-                {project.stack.slice(0, 4).map((item) => <span>{item}</span>)}
-              </div>
-              <div class="card-actions">
-                <a class="text-link" href={`/projects/${project.slug}/`}>Project details</a>
-                <a class="text-link muted" href={project.demoUrl}>Live demo</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab -->
+  <section class="section" id="lab">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Lab</p>
+        <h2>Personal R&amp;D.</h2>
+        <p>Self-directed prototypes exploring multimodal RAG, multi-agent systems, and classical ML.</p>
+      </div>
+      <div class="lab-grid">
+        {
+          labProjects.map((l) => (
+            <article class="lab-card">
+              <h3>{l.title}</h3>
+              <p>{l.blurb}</p>
+              <div class="tag-row">{l.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="card-links"><a href={l.repo}>GitHub →</a></div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Experience</p><h2>10+ years, top to bottom of the stack.</h2></div>
+      <div class="xp">
+        {
+          experience.map((x) => (
+            <div class="xp-item">
+              <div class="xp-when">{x.when}</div>
+              <div>
+                <div><span class="xp-role">{x.role}</span> · <span class="xp-co">{x.company}</span></div>
+                <div class="xp-detail">{x.detail}</div>
               </div>
             </div>
-          </article>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="section split-section">
-    <div>
-      <p class="eyebrow">Deployment path</p>
-      <h2>Remote server rollout</h2>
-      <p>
-        The first deployment is live over HTTP by IP and port. A domain,
-        HTTPS, and reverse proxy can be added later without changing the
-        project pages.
-      </p>
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Skills</p><h2>Technical toolkit.</h2></div>
+      <div class="skill-grid">
+        {
+          skills.map((s) => (
+            <div class="skill-cat">
+              <h3>{s.cat}</h3>
+              <div class="tag-row">{s.items.map((i) => <span class="tag">{i}</span>)}</div>
+            </div>
+          ))
+        }
+      </div>
     </div>
-    <ol class="phase-list">
-      {deploymentPhases.map((phase) => <li>{phase}</li>)}
-    </ol>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2>Let's build something reliable.</h2>
+      <p>Open to AI/agentic engineering and staff-level roles, and consulting engagements.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a class="btn btn-ghost" href={profile.github}>GitHub</a>
+        <a class="btn btn-ghost" href={profile.resumeUrl}>Résumé (PDF)</a>
+      </div>
+    </div>
   </section>
 </BaseLayout>

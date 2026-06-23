@@ -1,43 +1,77 @@
 ---
 import "../styles/global.css";
+import { profile } from "../data/profile";
 
-type Props = {
-  title?: string;
-  description?: string;
-};
-
+type Props = { title?: string; description?: string };
 const {
-  title = "Hao Hu - AI Project Portfolio",
-  description = "Portfolio and demo hub for production-shaped AI agent projects.",
+  title = `${profile.name} — ${profile.role}`,
+  description = "Production AI & agentic systems engineer with 10+ years across Google, Uber, and Microsoft.",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;650;700;750;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      // no-flash theme init
+      (function () {
+        try {
+          const saved = localStorage.getItem("theme");
+          if (saved) document.documentElement.setAttribute("data-theme", saved);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Home">
-        <span class="brand-mark">HH</span>
-        <span>Hao Hu</span>
-      </a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="/#projects">Projects</a>
-        <a href="/roadmap/">Roadmap</a>
-        <a href="https://github.com/felixhuhao">GitHub</a>
-      </nav>
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Home">
+          <span class="brand-mark">{profile.initials}</span>
+          <span>{profile.name}</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <div class="nav-links">
+            <a href="/#projects">Projects</a>
+            <a href="/#experience">Experience</a>
+            <a href="/#skills">Skills</a>
+            <a href={profile.resumeUrl}>Résumé</a>
+            <a href={profile.github}>GitHub</a>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" type="button">
+            <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          </button>
+        </nav>
+      </div>
     </header>
-    <main>
-      <slot />
-    </main>
+    <main><slot /></main>
     <footer class="site-footer">
-      <span>AI systems portfolio</span>
-      <a href="https://github.com/felixhuhao">github.com/felixhuhao</a>
+      <div class="wrap">
+        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <a href={profile.github}>github.com/felixhuhao</a>
+      </div>
     </footer>
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById("theme-toggle");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+          root.setAttribute("data-theme", next);
+          try { localStorage.setItem("theme", next); } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>

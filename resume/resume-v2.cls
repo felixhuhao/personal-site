@@ -15,7 +15,7 @@
 % ---- spacing ----
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\linespread{1.04}
+\linespread{1.06}
 % suppress automatic hyphenation (still allow breaks at explicit hyphens); keep justification clean
 \hyphenpenalty=10000
 \tolerance=2000
@@ -40,7 +40,7 @@
 \hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
 
 % ---- list defaults (tight) ----
-\setlist[itemize]{leftmargin=1.15em, itemsep=1.35pt, topsep=1pt, partopsep=0pt, parsep=0pt,
+\setlist[itemize]{leftmargin=1.15em, itemsep=1.8pt, topsep=1pt, partopsep=0pt, parsep=0pt,
   label=\textcolor{accent}{\small\textbullet}}
 
 % ---- header blocks ----
@@ -54,21 +54,21 @@
 }
 \newcommand{\contact}[1]{%
   {\centering\normalsize #1\par}%
-  \vspace{1pt}%
+  \vspace{2pt}%
 }
 
 % ---- section header with rule ----
 \newif\ifcv@firstentry
 \newcommand{\cvsection}[1]{%
-  \vspace{5pt}%
+  \vspace{6pt}%
   {\large\bfseries\color{accent}\addfontfeature{LetterSpace=8.0}\MakeUppercase{#1}}\par\vspace{3pt}%
-  {\color{accent}\hrule height 1.1pt}\vspace{5pt}%
+  {\color{accent}\hrule height 1.1pt}\vspace{6pt}%
   \cv@firstentrytrue
 }
 
 % ---- experience entry: {company}{dates}{role}{location} ----
 \newcommand{\cventry}[4]{%
-  \ifcv@firstentry\cv@firstentryfalse\else\vspace{3pt}\fi
+  \ifcv@firstentry\cv@firstentryfalse\else\vspace{4pt}\fi
   {\bfseries #1}\hfill{\bfseries #2}\par
   {\itshape #3}\hfill{\itshape\color{muted} #4}\par
   \vspace{1pt}%
@@ -76,7 +76,7 @@
 
 % ---- education entry: {school}{dates}{degree}{detail} ----
 \newcommand{\cvedu}[4]{%
-  \ifcv@firstentry\cv@firstentryfalse\else\vspace{3pt}\fi
+  \ifcv@firstentry\cv@firstentryfalse\else\vspace{4pt}\fi
   {\bfseries #1}\hfill{#2}\par
   {\itshape #3}\hfill{\color{muted} #4}\par
   \vspace{1pt}%

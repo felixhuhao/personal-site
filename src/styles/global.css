@@ -415,9 +415,11 @@ main { position: relative; z-index: 1; }
   .case-cols, .arch-branch { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
 }
-@media (max-width: 560px) {
+@media (max-width: 700px) {
   .nav-links { display: none; }
   .nav-mobile { display: block; }
+}
+@media (max-width: 560px) {
   .xp-item { grid-template-columns: 1fr; gap: 4px; }
   .site-footer .wrap { flex-direction: column; }
 }

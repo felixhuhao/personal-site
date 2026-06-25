@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { notes } from "../../data/notes";
+
+const note = notes.find((n) => n.slug === "approval-boundary")!;
+const title = `${note.title} — Hao Hu`;
+---
+
+<BaseLayout title={title} description={note.dek}>
+  <article class="wrap article">
+    <a class="back-link" href="/notes/">← All notes</a>
+    <p class="eyebrow">Notes</p>
+    <h1>{note.title}</h1>
+    <p class="article-meta">{note.date} · {note.readingTime}</p>
+
+    <div class="prose">
+      <p>
+        The scariest moment in an agent demo is the first time it says
+        <em>“done — I've updated the order.”</em> Once a language model can write to
+        your business data, the usual safety story — a careful system prompt, a polite
+        “only do this if you're sure” — stops being a control. The model is a text
+        generator that can be wrong, jailbroken, or injected. You can't prompt your way
+        out of that.
+      </p>
+      <p>
+        So in the ERP operations copilot, I drew a hard line: <strong>the model can
+        propose a write, but it can never approve one.</strong> Approval is not in the
+        agent's toolset at all. The agent has a <code>request_approval</code> tool that
+        only <em>creates a pending request</em>; a human approves it through a separate
+        REST path the agent has no access to; and execution happens against a record the
+        model never controls.
+      </p>
+
+      <h2>The chain that runs before a write</h2>
+      <p>
+        The interesting part is execution. When an approved write finally runs, the Java
+        MCP server re-validates the whole chain — not because it trusts the agent, but
+        because it trusts nothing:
+      </p>
+
+      <pre><code>{`// Approval is NOT an agent tool. The model requests; a human approves.
+// Execution re-validates the entire chain before the write runs:
+
+if (!APPROVED.equals(record.getStatus()))           reject("not approved");
+if (record.isExpired())                             reject("expired");        // 15-min TTL
+if (!record.getPayloadHash().equals(hash(payload))) reject("hash mismatch");  // integrity
+if (!record.getToolName().equals(op.toolName()))    reject("binding");        // no reuse
+if (!record.getOperationType().equals(op.type()))   reject("binding");
+if (!markConsumed(record))                          reject("already used");   // single-use
+revalidatePreconditions(op);                        // stale world -> reject
+execute(op);                                        // only now, in a transaction`}</code></pre>
+
+      <p>Each line closes a specific door:</p>
+      <ul>
+        <li><strong>Status &amp; expiry.</strong> The approval has to be in the
+          <code>APPROVED</code> state and inside a 15-minute TTL. An approval that's been
+          sitting around, or was never granted, is worthless.</li>
+        <li><strong>Payload integrity.</strong> The payload must be valid JSON whose hash
+          matches what was approved. You can't get a human to approve a small change and
+          then execute a large one — the bytes are pinned.</li>
+        <li><strong>Binding.</strong> The <code>toolName</code> and operation type must
+          match the record. An approval minted for <code>order_update</code> can't be
+          redirected into <code>purchase_order_create</code>. It's also bound to the actor
+          and session that approved it.</li>
+        <li><strong>Single use.</strong> Execution marks the record consumed in the same
+          step. Replaying the call does nothing — the second attempt finds it spent.</li>
+        <li><strong>Freshness.</strong> Preconditions are re-checked at execution time; if
+          the world moved since approval, the write is rejected and a fresh approval is
+          required.</li>
+      </ul>
+
+      <h2>Why split it this way</h2>
+      <p>
+        The model's job is to be useful; the boundary's job is to be paranoid. Keeping
+        those in different processes — Python agent on one side, Java approval executor on
+        the other — means the two concerns can't blur. A prompt injection that convinces
+        the agent to “just run the refund” still hits a wall: it can request approval, but
+        a human never clicked, so nothing executes. A hallucinated tool call produces an
+        approval ID that doesn't validate. A replayed request is already consumed.
+      </p>
+      <p>
+        “Be careful” is a vibe. A signed, hashed, expiring, single-use, actor-bound
+        approval is a control — and it's the difference between a demo and something you'd
+        let touch production.
+      </p>
+    </div>
+
+    <div class="article-foot">
+      <a href="https://github.com/felixhuhao/ecommerce-mcp-server" target="_blank" rel="noopener">Source: ecommerce-mcp-server →</a>
+      <a href="/work/erp-ai-layer/">See it in the ERP AI layer →</a>
+    </div>
+  </article>
+</BaseLayout>

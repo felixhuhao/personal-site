@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { notes } from "../../data/notes";
+
+const note = notes.find((n) => n.slug === "sql-guard")!;
+const title = `${note.title} — Hao Hu`;
+---
+
+<BaseLayout title={title} description={note.dek}>
+  <article class="wrap article">
+    <a class="back-link" href="/notes/">← All notes</a>
+    <p class="eyebrow">Notes</p>
+    <h1>{note.title}</h1>
+    <p class="article-meta">{note.date} · {note.readingTime}</p>
+
+    <div class="prose">
+      <p>
+        Natural-language-to-SQL is a great demo and a terrifying production feature. The
+        moment a model writes queries against your warehouse, two bad things become
+        possible: a query that <em>mutates or destroys</em> data, and a query that's
+        technically read-only but scans everything or quietly returns the wrong number.
+        You can't prompt your way out of either — “only write safe SELECTs” is a
+        suggestion, not a guarantee.
+      </p>
+      <p>
+        The guard in the analytics agent takes a firm position:
+        <strong>validate the parse tree, not the string.</strong> Regex blocklists are a
+        trap — <code>/*x*/DROP</code>, casing, whitespace, and nested subqueries all slip
+        past them. So every candidate query is parsed with SQLGlot into an AST, and the
+        guard reasons about <em>structure</em>, where formatting tricks don't exist.
+      </p>
+
+      <pre><code>{`def guard_sql(sql, scope, dialect) -> GuardResult:
+    statements = parse(sql, dialect)              # SQLGlot AST
+    if len(statements) != 1:
+        return reject("syntax_guard", "one statement only")
+
+    expr = statements[0]
+    if blocked_command(sql, dialect):             # DROP / INSERT / UPDATE / ...
+        return reject("operation_guard", "command not allowed")
+    if not isinstance(expr, exp.Select):          # root node must be SELECT
+        return reject("operation_guard", "SELECT only")
+    if blocked_function(expr):                    # file / system functions
+        return reject("function_guard", "function not allowed")
+
+    for table in expr.find_all(exp.Table):        # every table in the allowlist
+        if table.name not in scope.allowed_tables:
+            return reject("scope_guard", f"table {table.name} not allowed")
+
+    if fanout_risk(expr):                         # join would double-count amounts
+        return reject("fanout_guard", "fan-out risk")
+
+    expr = apply_auto_limit(expr)                 # AST rewrite, not string append
+    return GuardResult(allowed=True, sql=expr.sql(dialect))`}</code></pre>
+
+      <h2>Layers, each closing a class of failure</h2>
+      <ul>
+        <li><strong>One statement, SELECT only.</strong> The root of the tree must be a
+          <code>Select</code> node; multiple statements and <code>UNION</code> are
+          rejected. Because it's checked on node type, <code>SELECT</code> dressed up with
+          comments or trailing <code>; DROP …</code> doesn't parse to something allowed.</li>
+        <li><strong>Blocked commands &amp; functions.</strong> DDL/DML and file/system
+          functions are refused outright — the things a read-only analytics path should
+          never touch.</li>
+        <li><strong>Table scope.</strong> Every <code>Table</code> node in the tree —
+          including ones buried in subqueries and CTEs — must be in an allowlist. The model
+          can't reach tables it wasn't given.</li>
+        <li><strong>Fan-out risk.</strong> This one is about <em>correctness</em>, not
+          safety: a join that double-counts an order amount produces a confident, wrong
+          total. The guard detects that structural shape and rejects it. Wrong numbers are
+          as dangerous as unsafe ones.</li>
+        <li><strong>Auto-LIMIT.</strong> A bound is injected by rewriting the AST (not by
+          string-appending <code>LIMIT</code>), unless the query is a scalar aggregate that
+          returns a single row.</li>
+      </ul>
+
+      <h2>Fail closed, then repair</h2>
+      <p>
+        The guard returns a structured <code>GuardResult</code> with a category —
+        <code>scope_guard</code>, <code>fanout_guard</code>, and so on. That category feeds
+        a <strong>bounded repair loop</strong>: a rejected query goes back to the model
+        with the specific reason, it gets a small number of attempts to fix it, and if it
+        still won't pass, the request fails closed rather than guessing. Nothing reaches
+        the warehouse until the tree is provably safe.
+      </p>
+      <p>
+        Two things make this practical. A Qdrant-backed semantic layer feeds the model only
+        the relevant tables and columns instead of the whole schema — which cut prompt
+        context by ~73% and, as a side effect, shrank what the model could even attempt to
+        reference. And a result-equivalence smoke suite runs the same questions across
+        DuckDB and ClickHouse, so a guard or prompt change that breaks an answer is caught
+        before it ships.
+      </p>
+      <p>
+        The model proposes SQL; the guard decides whether it runs. Safe by construction,
+        not by instruction.
+      </p>
+    </div>
+
+    <div class="article-foot">
+      <a href="https://github.com/felixhuhao/nl2sql-data-agent" target="_blank" rel="noopener">Source: nl2sql-data-agent →</a>
+      <a href="/work/erp-ai-layer/">See it in the ERP AI layer →</a>
+    </div>
+  </article>
+</BaseLayout>

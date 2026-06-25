@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { notes } from "../../data/notes";
+
+const title = "Notes — Hao Hu";
+const description =
+  "Short engineering notes on building production AI: safety boundaries, deterministic guardrails, and evaluation.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="wrap case-hero">
+    <a class="back-link" href="/">← Back home</a>
+    <p class="eyebrow">Notes</p>
+    <h1>Engineering notes.</h1>
+    <p class="case-lead">
+      Short write-ups on the parts of production AI that don't fit in a bullet point —
+      safety boundaries, deterministic guardrails, and how I make agent behavior measurable.
+    </p>
+  </section>
+
+  <section class="section wrap">
+    <div class="note-list">
+      {
+        notes.map((n) => (
+          <a class="note-row" href={`/notes/${n.slug}/`}>
+            <div class="note-meta">{n.date} · {n.readingTime}</div>
+            <h2>{n.title}</h2>
+            <p>{n.dek}</p>
+            <span class="note-more">Read →</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

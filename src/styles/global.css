@@ -368,6 +368,45 @@ main { position: relative; z-index: 1; }
 .arch-sib-tag { color: var(--faint); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
 .arch-foot { font-size: 0.82rem; margin-top: 0.6rem; }
 
+/* ---------------- notes / articles ---------------- */
+.note-list { display: grid; gap: 14px; max-width: 760px; }
+.note-row {
+  display: block; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); padding: 22px 24px;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.note-row:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow); }
+.note-meta { color: var(--faint); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; }
+.note-row h2 { font-size: 1.3rem; margin: 0.35rem 0 0.5rem; }
+.note-row p { color: var(--muted); font-size: 0.96rem; margin-bottom: 0.7rem; }
+.note-more { color: var(--accent); font-size: 0.9rem; font-weight: 650; }
+
+.article { max-width: 720px; padding-top: 8px; }
+.article > h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin: 0.3rem 0 0.6rem; }
+.article-meta { color: var(--faint); font-size: 0.88rem; font-weight: 600; margin-bottom: 1.8rem; }
+.prose > p { color: var(--muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.2rem; }
+.prose strong, .prose em { color: var(--ink); }
+.prose h2 { font-size: 1.3rem; margin: 2rem 0 0.8rem; }
+.prose ul { margin: 0 0 1.2rem; padding-left: 0; list-style: none; display: grid; gap: 0.6rem; }
+.prose ul li { position: relative; padding-left: 1.3rem; color: var(--muted); font-size: 1.02rem; line-height: 1.65; }
+.prose ul li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.prose ul li strong { color: var(--ink); }
+.prose pre {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface-2); padding: 16px 18px; overflow-x: auto;
+  margin: 0 0 1.4rem; font-size: 0.84rem; line-height: 1.6;
+}
+.prose pre code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  border: 0; background: transparent; padding: 0; color: var(--ink); font-size: inherit; white-space: pre;
+}
+.article-foot {
+  display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; margin-top: 2.2rem;
+  padding-top: 1.4rem; border-top: 1px solid var(--border-soft);
+}
+.article-foot a { color: var(--accent); font-size: 0.92rem; font-weight: 650; }
+.article-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 /* ---------------- responsive ---------------- */
 @media (max-width: 880px) {
   .hero-inner, .about-grid, .detail-hero { grid-template-columns: 1fr; }

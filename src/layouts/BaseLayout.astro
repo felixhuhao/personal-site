@@ -8,8 +8,8 @@ const {
   description = "Production AI & agentic systems engineer with 10+ years building distributed systems, including at Google, Uber, and Microsoft.",
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://example.com").href;
-const ogImage = new URL("/og.png", Astro.site ?? "https://example.com").href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL("/og.png", Astro.site).href;
 ---
 
 <!doctype html>

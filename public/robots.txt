@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haohu.tech/sitemap-index.xml

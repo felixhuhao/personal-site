@@ -6,6 +6,7 @@ export const profile = {
   location: "Wuhan, China",
   email: "felixhuhao@gmail.com",
   github: "https://github.com/felixhuhao",
+  linkedin: "https://www.linkedin.com/in/hao-hu-a6742a30/",
   resumeUrl: "/resume-v2.pdf",
   heroEyebrow: "PRODUCTION AI · AGENTIC SYSTEMS · ENGINEERING LEADER",
   heroHeadlinePrefix: "I build ",

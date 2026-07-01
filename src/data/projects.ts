@@ -22,8 +22,8 @@ export const projects: Project[] = [
     kicker: "Knowledge",
     summary:
       "Document-intelligence platform with intent-driven retrieval, a feedback-driven evaluation harness, and citation-grounded answers that refuse unsupported claims.",
-    demoUrl: "http://175.27.136.242:5173/",
-    image: "/images/enterprise-rag.svg",
+    demoUrl: "https://knowledge.haohu.tech",
+    image: "/images/enterprise-rag.webp",
     repos: [
       { label: "felixhuhao/enterprise_rag", url: "https://github.com/felixhuhao/enterprise_rag" },
     ],
@@ -55,8 +55,8 @@ export const projects: Project[] = [
     kicker: "Analytics",
     summary:
       "OLAP analytics agent that turns business questions into guarded SQL behind a deterministic SQLGlot safety layer, with a semantic metadata layer and bounded repair.",
-    demoUrl: "http://175.27.136.242:5174/",
-    image: "/images/nl2sql-agent.svg",
+    demoUrl: "https://analytics.haohu.tech",
+    image: "/images/nl2sql-agent.webp",
     repos: [
       { label: "felixhuhao/nl2sql-data-agent", url: "https://github.com/felixhuhao/nl2sql-data-agent" },
     ],
@@ -88,8 +88,8 @@ export const projects: Project[] = [
     kicker: "Operations",
     summary:
       "Agentic operations over business entities through governed MCP tools, with specialist routing and a human-in-the-loop approval boundary for risky writes.",
-    demoUrl: "http://175.27.136.242:8010/",
-    image: "/images/ecommerce-agent.svg",
+    demoUrl: "https://copilot.haohu.tech",
+    image: "/images/ecommerce-agent.webp",
     repos: [
       { label: "felixhuhao/ecommerce-agent", url: "https://github.com/felixhuhao/ecommerce-agent" },
       { label: "felixhuhao/ecommerce-mcp-server", url: "https://github.com/felixhuhao/ecommerce-mcp-server" },

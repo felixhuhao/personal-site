@@ -33,6 +33,7 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
         <a class="btn btn-primary" href="#projects">View work</a>
         <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">Résumé (PDF)</a>
         <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+        {profile.linkedin && <a class="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
       </div>
       <div class="hero-meta">
         <span>{profile.location}</span>
@@ -133,7 +134,7 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
               <h3>{l.title}</h3>
               <p>{l.blurb}</p>
               <div class="tag-row">{l.tags.map((t) => <span class="tag">{t}</span>)}</div>
-              <div class="card-links"><a href={l.repo}>GitHub →</a></div>
+              <div class="card-links"><a href={l.repo} target="_blank" rel="noopener">GitHub →</a></div>
             </article>
           ))
         }
@@ -166,8 +167,8 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
       <p>Open to AI/agentic engineering and staff-level roles, and consulting engagements.</p>
       <div class="contact-actions">
         <a class="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
-        <a class="btn btn-ghost" href={profile.github}>GitHub</a>
-        <a class="btn btn-ghost" href={profile.resumeUrl}>Résumé (PDF)</a>
+        <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">Résumé (PDF)</a>
       </div>
     </div>
   </section>

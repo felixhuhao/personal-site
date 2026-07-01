@@ -37,7 +37,7 @@ const ogImage = new URL("/og.png", Astro.site ?? "https://example.com").href;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;650;700;750;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
@@ -62,9 +62,9 @@ const ogImage = new URL("/og.png", Astro.site ?? "https://example.com").href;
             <a href="/#projects">Projects</a>
             <a href="/#experience">Experience</a>
             <a href="/#skills">Skills</a>
-            <a href="/notes/">Notes</a>
-            <a href={profile.resumeUrl}>Résumé</a>
-            <a href={profile.github}>GitHub</a>
+            <a href={profile.resumeUrl} target="_blank" rel="noopener">Résumé</a>
+            <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
+            {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
           </div>
           <details class="nav-mobile">
             <summary aria-label="Open menu">
@@ -74,9 +74,9 @@ const ogImage = new URL("/og.png", Astro.site ?? "https://example.com").href;
               <a href="/#projects">Projects</a>
               <a href="/#experience">Experience</a>
               <a href="/#skills">Skills</a>
-              <a href="/notes/">Notes</a>
-              <a href={profile.resumeUrl}>Résumé</a>
-              <a href={profile.github}>GitHub</a>
+              <a href={profile.resumeUrl} target="_blank" rel="noopener">Résumé</a>
+              <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
+              {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
             </div>
           </details>
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" type="button">
@@ -90,7 +90,8 @@ const ogImage = new URL("/og.png", Astro.site ?? "https://example.com").href;
     <footer class="site-footer">
       <div class="wrap">
         <span>© {new Date().getFullYear()} {profile.name}</span>
-        <a href={profile.github}>github.com/felixhuhao</a>
+        <a href={profile.github} target="_blank" rel="noopener">github.com/felixhuhao</a>
+        {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
       </div>
     </footer>
     <script is:inline>

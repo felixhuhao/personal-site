@@ -8,31 +8,36 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
   <!-- Hero -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <div>
-        <p class="eyebrow">{profile.role} · {profile.tagline}</p>
-        <h1>Production <span class="grad">AI & agentic systems</span> — built to be trusted.</h1>
-        <p class="hero-lead">{profile.heroLead}</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">View projects</a>
-          <a class="btn btn-ghost" href={profile.resumeUrl}>Résumé (PDF)</a>
-          <a class="btn btn-ghost" href={profile.github}>GitHub</a>
+      <p class="hero-eyebrow">{profile.heroEyebrow}</p>
+      <h1>
+        {profile.heroHeadlinePrefix}<span class="grad">{profile.heroHeadlineAccent}</span>{profile.heroHeadlineSuffix}
+      </h1>
+      <p class="hero-lead">{profile.heroSub}</p>
+
+      <div class="hero-proof" aria-label="Career proof points">
+        <div class="pedigree-strip">
+          <div class="pedigree-companies">
+            {profile.pedigree.map((company) => <strong>{company}</strong>)}
+          </div>
+          <span>{profile.currentRole}</span>
         </div>
-        <div class="hero-meta">
-          <span>{profile.location}</span>
-          <span>{profile.email}</span>
+        <div class="hero-metrics">
+          {profile.heroMetrics.map((metric) => <span>{metric}</span>)}
+        </div>
+        <div class="hero-skills">
+          {profile.heroSkills.map((skill) => <span>{skill}</span>)}
         </div>
       </div>
-      <div class="stat-panel">
-        {
-          profile.stats.map((s) => (
-            <div class="stat-row">
-              <span class="stat-num">
-                {s.accent ? <span class="accent">{s.accent}</span> : s.num}
-              </span>
-              <span class="stat-label">{s.label}</span>
-            </div>
-          ))
-        }
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View work</a>
+        <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">Résumé (PDF)</a>
+        <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+        {profile.linkedin && <a class="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+      </div>
+      <div class="hero-meta">
+        <span>{profile.location}</span>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </div>
     </div>
   </section>
@@ -45,10 +50,13 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
         <div>
           {about.paragraphs.map((p) => <p set:html={p} />)}
         </div>
-        <div class="pillars">
-          {about.pillars.map((pl) => (
-            <div class="pillar"><h3>{pl.title}</h3><p>{pl.body}</p></div>
-          ))}
+        <div>
+          <p class="pov-label">How I build AI that holds up</p>
+          <div class="pillars">
+            {about.pillars.map((pl) => (
+              <div class="pillar"><h3>{pl.title}</h3><p>{pl.body}</p></div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -61,9 +69,11 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
         <p class="eyebrow">Selected work</p>
         <h2>One ERP AI layer: knowledge, analytics, operations.</h2>
         <p>
-          Three production systems built for an enterprise ERP client — an operations
-          copilot that delegates analytics and retrieval to specialized agents.
+          Three production systems built for one enterprise ERP client, sharing one safety
+          and evaluation practice — an operations copilot, a self-service analytics agent,
+          and a knowledge assistant.
         </p>
+        <div class="section-cta"><a class="btn btn-primary" href="/work/erp-ai-layer/">Read the full case study →</a></div>
       </div>
       <div class="proj-grid">
         {
@@ -78,33 +88,10 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
                 <p>{p.summary}</p>
                 <div class="tag-row">{p.stack.slice(0, 4).map((t) => <span class="tag">{t}</span>)}</div>
                 <div class="card-links">
-                  <a href={`/projects/${p.slug}/`}>Case study →</a>
-                  {p.demoUrl && <a href={p.demoUrl}>Live demo</a>}
+                  <a href={`/projects/${p.slug}/`}>Deep dive →</a>
+                  {p.demoUrl && <a href={p.demoUrl} target="_blank" rel="noopener">Live demo (login-gated)</a>}
                 </div>
               </div>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Lab -->
-  <section class="section" id="lab">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Lab</p>
-        <h2>Personal R&amp;D.</h2>
-        <p>Self-directed prototypes exploring multimodal RAG, multi-agent systems, and classical ML.</p>
-      </div>
-      <div class="lab-grid">
-        {
-          labProjects.map((l) => (
-            <article class="lab-card">
-              <h3>{l.title}</h3>
-              <p>{l.blurb}</p>
-              <div class="tag-row">{l.tags.map((t) => <span class="tag">{t}</span>)}</div>
-              <div class="card-links"><a href={l.repo}>GitHub →</a></div>
             </article>
           ))
         }
@@ -126,6 +113,29 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
                 <div class="xp-detail">{x.detail}</div>
               </div>
             </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab -->
+  <section class="section" id="lab">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Lab</p>
+        <h2>Personal R&amp;D.</h2>
+        <p>Self-directed prototypes exploring multimodal RAG, multi-agent systems, and classical ML.</p>
+      </div>
+      <div class="lab-grid">
+        {
+          labProjects.map((l) => (
+            <article class="lab-card">
+              <h3>{l.title}</h3>
+              <p>{l.blurb}</p>
+              <div class="tag-row">{l.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="card-links"><a href={l.repo} target="_blank" rel="noopener">GitHub →</a></div>
+            </article>
           ))
         }
       </div>
@@ -157,8 +167,8 @@ import { profile, about, experience, skills, labProjects } from "../data/profile
       <p>Open to AI/agentic engineering and staff-level roles, and consulting engagements.</p>
       <div class="contact-actions">
         <a class="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
-        <a class="btn btn-ghost" href={profile.github}>GitHub</a>
-        <a class="btn btn-ghost" href={profile.resumeUrl}>Résumé (PDF)</a>
+        <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">Résumé (PDF)</a>
       </div>
     </div>
   </section>

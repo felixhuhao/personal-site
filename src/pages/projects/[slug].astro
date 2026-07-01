@@ -20,8 +20,8 @@ const { project } = Astro.props;
       <h1>{project.title}</h1>
       <p>{project.summary}</p>
       <div class="hero-actions">
-        {project.demoUrl && <a class="btn btn-primary" href={project.demoUrl}>Live demo</a>}
-        <a class="btn btn-ghost" href={project.repos[0].url}>View source</a>
+        {project.demoUrl && <a class="btn btn-primary" href={project.demoUrl} target="_blank" rel="noopener">Live demo (login-gated)</a>}
+        <a class="btn btn-ghost" href={project.repos[0].url} target="_blank" rel="noopener">View source</a>
       </div>
     </div>
     <img class="detail-img" src={project.image} alt={`${project.shortTitle} preview`} />
@@ -54,7 +54,7 @@ const { project } = Astro.props;
     <div class="panel" style="margin-top:18px">
       <h2>Source</h2>
       <div class="repo-row">
-        {project.repos.map((r) => <a href={r.url}>{r.label}</a>)}
+        {project.repos.map((r) => <a href={r.url} target="_blank" rel="noopener">{r.label}</a>)}
       </div>
     </div>
   </section>

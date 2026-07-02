@@ -11,7 +11,7 @@ export const profile = {
   heroEyebrow: "PRODUCTION AI · AGENTIC SYSTEMS · ENGINEERING LEADER",
   heroHeadlinePrefix: "I build ",
   heroHeadlineAccent: "production AI",
-  heroHeadlineSuffix: " that holds up.",
+  heroHeadlineSuffix: " that holds up",
   heroSub:
     "RAG, conversational analytics & MCP-backed multi-agent systems with guardrails, grounding, human approval, and real evals — backed by 10+ years building distributed systems, including at Google, Uber & Microsoft, now as a hands-on CTO.",
   pedigree: ["Google", "Uber", "Microsoft"],

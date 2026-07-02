@@ -117,7 +117,7 @@ const zh = {
     heroEyebrow: "生产级 AI · 智能体系统 · 工程负责人",
     heroHeadlinePrefix: "我构建 ",
     heroHeadlineAccent: "经得起生产考验的 AI",
-    heroHeadlineSuffix: "。",
+    heroHeadlineSuffix: "",
     heroSub:
       "RAG、对话式数据分析与 MCP 驱动的多智能体系统，配以确定性护栏、引用溯源、人在回路审批与真实评测 —— 背后是 10 余年分布式系统构建经验，曾就职于 Google、Uber 与 Microsoft，现为实战型 CTO。",
     pedigree: ["Google", "Uber", "Microsoft"],

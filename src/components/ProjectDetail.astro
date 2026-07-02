@@ -1,0 +1,56 @@
+---
+import { getContent, localizePath, type Lang } from "../i18n";
+import type { Project } from "../data/projects";
+
+type Props = { lang: Lang; project: Project };
+const { lang, project } = Astro.props;
+const c = getContent(lang);
+const t = c.detail;
+const projectsHref = `${localizePath("/", lang)}#projects`;
+---
+
+<section class="wrap detail-hero">
+  <div>
+    <a class="back-link" href={projectsHref}>{t.back}</a>
+    <p class="eyebrow">{project.kicker}</p>
+    <h1>{project.title}</h1>
+    <p>{project.summary}</p>
+    <div class="hero-actions">
+      {project.demoUrl && <a class="btn btn-primary" href={project.demoUrl} target="_blank" rel="noopener">{t.demo}</a>}
+      <a class="btn btn-ghost" href={project.repos[0].url} target="_blank" rel="noopener">{t.viewSource}</a>
+    </div>
+  </div>
+  <img class="detail-img" src={project.image} alt={`${project.shortTitle} ${c.nav.imagePreview}`} />
+</section>
+
+<section class="section wrap">
+  <div class="panel" style="margin-bottom:18px">
+    <h2>{t.howItWorks}</h2>
+    <p class="muted">{project.architecture}</p>
+    <div class="tag-row" style="margin-top:14px">
+      {project.stack.map((s) => <span class="tag">{s}</span>)}
+    </div>
+  </div>
+
+  <div class="detail-cols">
+    <div class="panel">
+      <h2>{t.capabilities}</h2>
+      <ul class="check">{project.capabilities.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <div class="panel">
+      <h2>{t.evidence}</h2>
+      <ul class="check">{project.proof.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <div class="panel">
+      <h2>{t.tryThis}</h2>
+      <ul class="check">{project.tryThis.map((x) => <li>{x}</li>)}</ul>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <h2>{t.source}</h2>
+    <div class="repo-row">
+      {project.repos.map((r) => <a href={r.url} target="_blank" rel="noopener">{r.label}</a>)}
+    </div>
+  </div>
+</section>

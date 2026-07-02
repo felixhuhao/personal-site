@@ -29,7 +29,7 @@ export const projects: Project[] = [
     ],
     stack: ["Vue 3", "FastAPI", "LangGraph", "Milvus", "SSE", "Docker Compose"],
     capabilities: [
-      "Intent-driven retrieval strategies (balanced, exact, recall, discovery) over hybrid search, query expansion, HyDE, and RRF reranking.",
+      "Intent-driven retrieval strategies (precise, balanced, broad) over hybrid search, query expansion, HyDE, and RRF reranking.",
       "Citation-grounded streaming answers with source validation and strict-evidence refusal.",
       "Feedback-driven golden set: user thumbs-up/down promoted into evaluation cases with expected chunks.",
       "Retrieval, answer, and judge-based regression checks with per-strategy breakdown.",
@@ -43,8 +43,8 @@ export const projects: Project[] = [
       "Strict-evidence mode refuses unsupported facts.",
     ],
     tryThis: [
-      "Look up an exact policy amount with exact retrieval.",
-      "Ask a broad question with recall mode.",
+      "Look up an exact policy amount with precise retrieval.",
+      "Ask a broad question in broad mode.",
       "Enable strict evidence and ask for an unsupported fact to see refusal behavior.",
     ],
   },

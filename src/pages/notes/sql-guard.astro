@@ -6,7 +6,7 @@ const note = notes.find((n) => n.slug === "sql-guard")!;
 const title = `${note.title} — Hao Hu`;
 ---
 
-<BaseLayout title={title} description={note.dek}>
+<BaseLayout lang="en" title={title} description={note.dek} hasAlternate={false}>
   <article class="wrap article">
     <a class="back-link" href="/notes/">← All notes</a>
     <p class="eyebrow">Notes</p>

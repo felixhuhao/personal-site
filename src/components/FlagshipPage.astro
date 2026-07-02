@@ -1,0 +1,115 @@
+---
+import { getContent, localizePath, type Lang } from "../i18n";
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const f = getContent(lang).flagship;
+const backHref = `${localizePath("/", lang)}#projects`;
+---
+
+<section class="wrap case-hero">
+  <a class="back-link" href={backHref}>{f.back}</a>
+  <p class="eyebrow">{f.eyebrow}</p>
+  <h1>{f.heading}</h1>
+  <p class="case-lead" set:html={f.lead} />
+  <div class="case-chips">{f.chips.map((o) => <span>{o}</span>)}</div>
+</section>
+
+<section class="section wrap">
+  <!-- Problem -->
+  <div class="case-block">
+    <h2>{f.problemHeading}</h2>
+    <p class="muted" set:html={f.problemBody} />
+  </div>
+
+  <!-- Architecture -->
+  <div class="case-block">
+    <h2>{f.archHeading}</h2>
+    <p class="muted case-note" set:html={f.archNote} />
+
+    <div class="arch">
+      <div class="arch-node arch-top">{f.archConsole}</div>
+      <div class="arch-arrow">↓</div>
+
+      <div class="arch-node arch-hub">
+        <strong>{f.archHub}</strong>
+        <span class="arch-sub">{f.archHubSub}</span>
+        <span class="arch-meta">{f.archHubMeta}</span>
+      </div>
+
+      <div class="arch-arrow">↓</div>
+
+      <div class="arch-branch">
+        <div class="arch-col">
+          <div class="arch-label">{f.archRouterLabel}</div>
+          <div class="arch-node arch-soft">{f.archSpecialists}</div>
+        </div>
+        <div class="arch-col">
+          <div class="arch-label">{f.archMcpLabel}</div>
+          <div class="arch-node">
+            <strong>{f.archMcpTitle}</strong> <span class="arch-sub">{f.archMcpSub}</span>
+            <span class="arch-meta">{f.archMcpMeta}</span>
+          </div>
+          <div class="arch-node arch-soft">
+            <strong>{f.archNl2sqlTitle}</strong>
+            <span class="arch-meta">{f.archNl2sqlMeta}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-support">{f.archSupport}</div>
+
+      <div class="arch-sibling">
+        <span class="arch-sib-tag">{f.archSiblingTag}</span>
+        <div>
+          <strong>{f.archSiblingTitle}</strong> <span class="arch-sub">{f.archSiblingSub}</span>
+          <span class="arch-meta">{f.archSiblingMeta}</span>
+        </div>
+      </div>
+    </div>
+    <p class="muted arch-foot">{f.archFoot}</p>
+  </div>
+
+  <!-- How it works -->
+  <div class="case-block">
+    <h2>{f.howHeading}</h2>
+    <div class="case-cols">
+      {f.howPanels.map((p) => (
+        <div class="panel">
+          <h3>{p.title}</h3>
+          <p class="muted" set:html={p.body} />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Outcomes -->
+  <div class="case-block">
+    <h2>{f.outcomesHeading}</h2>
+    <ul class="check">
+      {f.outcomes.map((o) => <li set:html={o} />)}
+    </ul>
+  </div>
+
+  <!-- Stack -->
+  <div class="case-block">
+    <h2>{f.stackHeading}</h2>
+    <div class="tag-row">{f.stack.map((s) => <span class="tag">{s}</span>)}</div>
+  </div>
+
+  <!-- Deep dives + source -->
+  <div class="case-cols case-links-grid">
+    <div class="panel">
+      <h3>{f.deepDivesHeading}</h3>
+      <div class="repo-row">
+        {f.deepDives.map((d) => <a href={localizePath(`/projects/${d.slug}/`, lang)}>{d.label} →</a>)}
+      </div>
+    </div>
+    <div class="panel">
+      <h3>{f.sourceHeading}</h3>
+      <div class="repo-row">
+        {f.repos.map((r) => <a href={r.href} target="_blank" rel="noopener">{r.label}</a>)}
+      </div>
+    </div>
+  </div>
+</section>

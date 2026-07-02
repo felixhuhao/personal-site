@@ -13,10 +13,10 @@ export const profile = {
   heroHeadlineAccent: "production AI",
   heroHeadlineSuffix: " that holds up.",
   heroSub:
-    "RAG, multi-agent & MCP systems with guardrails, grounding, human approval, and real evals — backed by 10+ years building distributed systems, including at Google, Uber & Microsoft, now as a hands-on CTO.",
+    "RAG, conversational analytics & MCP-backed multi-agent systems with guardrails, grounding, human approval, and real evals — backed by 10+ years building distributed systems, including at Google, Uber & Microsoft, now as a hands-on CTO.",
   pedigree: ["Google", "Uber", "Microsoft"],
   currentRole: "builder-CTO @ Yuanbao",
-  heroMetrics: ["10+ yrs", "10–30K QPS at ~140ms p99", "99.997% backup health"],
+  heroMetrics: ["10+ yrs", "10–30K QPS at ~140ms p99", "99.97% backup health"],
   heroSkills: ["LangGraph", "RAG", "MCP", "Go", "Java", "Python", "Google Cloud"],
 };
 
@@ -40,12 +40,20 @@ export const about = {
     },
     {
       title: "The hard part is the systems, not the model.",
-      body: "A decade of distributed-systems and data-infra work is what keeps these up under real load. The LLM is the easy 10%; the boundaries, state, and observability around it are the other 90%.",
+      body: "A decade of distributed-systems and data-infra work is what keeps these up under real load. The model is one component; the boundaries, state, evals, and observability around it are what make it production software.",
     },
   ],
 };
 
-export const experience = [
+export type Experience = {
+  when: string;
+  role: string;
+  company: string;
+  detail: string;
+  chips?: string[];
+};
+
+export const experience: Experience[] = [
   {
     when: "2025 — Present",
     role: "Chief Technology Officer",
@@ -65,14 +73,16 @@ export const experience = [
     role: "Senior Software Engineer",
     company: "Uber",
     detail:
-      "Built Uber's first CPG Ads backbone (10–30K QPS at ~140 ms p99) and the GTIN-keyed multi-location campaign model.",
+      "Built Uber's first CPG Ads backbone (10–30K QPS at ~140 ms p99) and the GTIN-keyed multi-location campaign model; led the phased production rollout.",
+    chips: ["Go", "gRPC", "DocStore", "Kafka", "Flink", "Prometheus/Grafana"],
   },
   {
     when: "2018 — 2021",
     role: "Software Engineer",
     company: "Google",
     detail:
-      "Cloud SQL: enabled reliable point-in-time recovery and raised backup health from 99.992% to 99.997%.",
+      "Cloud SQL: enabled reliable point-in-time recovery and raised backup health from 99.92% to 99.97%; ran data-plane on-call to a 99.95% SLA.",
+    chips: ["Java", "Go", "MySQL HA", "CSV import/export GA", "Cloud SQL IAM"],
   },
   {
     when: "2014 — 2017",
@@ -80,6 +90,7 @@ export const experience = [
     company: "Microsoft",
     detail:
       "Exchange/Outlook: built communication-signal and migration tooling supporting 400M+ Hotmail users moving to Outlook.",
+    chips: ["C#", "Exchange", "Graph People API", "SQL", "Monitoring/Alerting"],
   },
   {
     when: "2011 — 2013",
@@ -90,10 +101,25 @@ export const experience = [
   },
 ];
 
+export const education = [
+  {
+    school: "Bowling Green State University",
+    period: "2010 — 2012",
+    degree: "M.S. in Computer Science",
+    detail: "GPA 4.0/4.0 · Bowling Green, OH",
+  },
+  {
+    school: "Wuhan University",
+    period: "2006 — 2010",
+    degree: "B.S. in Software Engineering",
+    detail: "GPA 3.5/4.0 · Wuhan, China",
+  },
+];
+
 export const skills = [
   {
     cat: "LLM & Agents",
-    items: ["Agent orchestration", "Agent harnesses", "Tool / function calling", "MCP", "Multi-agent routing", "Context engineering / memory", "LangChain", "LangGraph", "DeepAgents", "OpenAI / Claude / DeepSeek"],
+    items: ["Agent orchestration", "Agent governance", "Tool / function calling", "MCP integration", "Multi-agent routing", "Context engineering", "LangChain", "LangGraph", "DeepAgents", "OpenAI / Claude / DeepSeek"],
   },
   {
     cat: "RAG & Retrieval",
@@ -101,11 +127,11 @@ export const skills = [
   },
   {
     cat: "Evaluation & Safety",
-    items: ["LangSmith", "RAGAS", "Eval harnesses", "LLM-as-judge", "Guardrails", "Human-in-the-loop"],
+    items: ["LangSmith", "RAGAS", "OpenEvals", "LLM-as-judge", "Guardrails", "Human-in-the-loop", "Observability"],
   },
   {
     cat: "Programming Languages",
-    items: ["Java", "Go", "Python", "SQL", "C#", "C++"],
+    items: ["Java & Go (Google readability)", "Python", "SQL", "C#", "C++"],
   },
   {
     cat: "Backend & Distributed Systems",

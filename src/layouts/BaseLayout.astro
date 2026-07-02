@@ -1,38 +1,58 @@
 ---
 import "../styles/global.css";
-import { profile } from "../data/profile";
+import { getContent, localizePath, alternatePath, languages, type Lang } from "../i18n";
 
-type Props = { title?: string; description?: string };
-const {
-  title = `${profile.name} — ${profile.role}`,
-  description = "Production AI & agentic systems engineer with 10+ years building distributed systems, including at Google, Uber, and Microsoft.",
-} = Astro.props;
+type Props = { title?: string; description?: string; lang: Lang; hasAlternate?: boolean };
+const { lang, title, description, hasAlternate = true } = Astro.props;
+const c = getContent(lang);
+
+const pageTitle = title ?? `${c.profile.name} — ${c.profile.role}`;
+const pageDescription = description ?? c.meta.siteDescription;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL("/og.png", Astro.site).href;
+const ogImagePath = lang === "zh" ? "/og-zh.png" : "/og.png";
+const ogImage = new URL(ogImagePath, Astro.site).href;
+
+// hreflang alternates
+const altPath = alternatePath(Astro.url.pathname);
+const enHref = new URL(lang === "en" ? Astro.url.pathname : altPath, Astro.site).href;
+const zhHref = new URL(lang === "zh" ? Astro.url.pathname : altPath, Astro.site).href;
+const otherLang: Lang = lang === "en" ? "zh" : "en";
+const ogLocale = lang === "zh" ? "zh_CN" : "en_US";
+
+const home = localizePath("/", lang);
+const navItems = [
+  { href: `${home}#projects`, label: c.nav.projects },
+  { href: `${home}#experience`, label: c.nav.experience },
+  { href: `${home}#skills`, label: c.nav.skills },
+];
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={lang} data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <meta name="description" content={pageDescription} />
+    <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
+    {hasAlternate && <link rel="alternate" hreflang="en" href={enHref} />}
+    {hasAlternate && <link rel="alternate" hreflang="zh" href={zhHref} />}
+    {hasAlternate && <link rel="alternate" hreflang="x-default" href={enHref} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0a0e16" />
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,33 +73,30 @@ const ogImage = new URL("/og.png", Astro.site).href;
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/" aria-label="Home">
-          <span class="brand-mark">{profile.initials}</span>
-          <span>{profile.name}</span>
+        <a class="brand" href={home} aria-label={c.nav.home}>
+          <span class="brand-mark">{c.profile.initials}</span>
+          <span>{c.profile.name}</span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav class="site-nav" aria-label={c.nav.primary}>
           <div class="nav-links">
-            <a href="/#projects">Projects</a>
-            <a href="/#experience">Experience</a>
-            <a href="/#skills">Skills</a>
-            <a href={profile.resumeUrl} target="_blank" rel="noopener">Résumé</a>
-            <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
-            {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+            {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+            <a href={c.profile.resumeUrl} target="_blank" rel="noopener">{c.nav.resume}</a>
+            <a href={c.profile.github} target="_blank" rel="noopener">{c.nav.github}</a>
           </div>
           <details class="nav-mobile">
-            <summary aria-label="Open menu">
+            <summary aria-label={c.nav.openMenu}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
             </summary>
             <div class="nav-mobile-panel">
-              <a href="/#projects">Projects</a>
-              <a href="/#experience">Experience</a>
-              <a href="/#skills">Skills</a>
-              <a href={profile.resumeUrl} target="_blank" rel="noopener">Résumé</a>
-              <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
-              {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+              {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+              <a href={c.profile.resumeUrl} target="_blank" rel="noopener">{c.nav.resume}</a>
+              <a href={c.profile.github} target="_blank" rel="noopener">{c.nav.github}</a>
+              {c.profile.linkedin && <a href={c.profile.linkedin} target="_blank" rel="noopener">{c.nav.linkedin}</a>}
+              {hasAlternate && <a class="nav-lang" href={altPath}>{languages[otherLang]}</a>}
             </div>
           </details>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" type="button">
+          {hasAlternate && <a class="lang-toggle" href={altPath} aria-label={c.nav.switchLanguage}>{languages[otherLang]}</a>}
+          <button class="theme-toggle" id="theme-toggle" aria-label={c.nav.toggleTheme} type="button">
             <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
           </button>
@@ -89,9 +106,9 @@ const ogImage = new URL("/og.png", Astro.site).href;
     <main><slot /></main>
     <footer class="site-footer">
       <div class="wrap">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
-        <a href={profile.github} target="_blank" rel="noopener">github.com/felixhuhao</a>
-        {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+        <span>© {new Date().getFullYear()} {c.profile.name}</span>
+        <a href={c.profile.github} target="_blank" rel="noopener">github.com/felixhuhao</a>
+        {c.profile.linkedin && <a href={c.profile.linkedin} target="_blank" rel="noopener">{c.nav.linkedin}</a>}
       </div>
     </footer>
     <script is:inline>

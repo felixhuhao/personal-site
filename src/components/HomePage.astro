@@ -1,0 +1,196 @@
+---
+import { getContent, localizePath, type Lang } from "../i18n";
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const c = getContent(lang);
+const { profile, about, experience, education, skills, labProjects, projects, home } = c;
+
+const base = localizePath("/", lang);
+const flagshipHref = localizePath("/work/erp-ai-layer/", lang);
+---
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="hero-eyebrow">{profile.heroEyebrow}</p>
+    <h1>
+      {profile.heroHeadlinePrefix}<span class="grad">{profile.heroHeadlineAccent}</span>{profile.heroHeadlineSuffix}
+    </h1>
+    <p class="hero-lead">{profile.heroSub}</p>
+
+    <div class="hero-proof" aria-label="Career proof points">
+      <div class="pedigree-strip">
+        <div class="pedigree-companies">
+          {profile.pedigree.map((company) => <strong>{company}</strong>)}
+        </div>
+        <span>{profile.currentRole}</span>
+      </div>
+      <div class="hero-metrics">
+        {profile.heroMetrics.map((metric) => <span>{metric}</span>)}
+      </div>
+      <div class="hero-skills">
+        {profile.heroSkills.map((skill) => <span>{skill}</span>)}
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={`${base}#projects`}>{home.heroViewWork}</a>
+      <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">{home.heroResume}</a>
+      <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">{c.nav.github}</a>
+      {profile.linkedin && <a class="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noopener">{c.nav.linkedin}</a>}
+    </div>
+    <div class="hero-meta">
+      <span>{profile.location}</span>
+      <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">{home.aboutEyebrow}</p><h2>{home.aboutHeading}</h2></div>
+    <div class="about-grid">
+      <div>
+        {about.paragraphs.map((p) => <p set:html={p} />)}
+      </div>
+      <div>
+        <p class="pov-label">{home.povLabel}</p>
+        <div class="pillars">
+          {about.pillars.map((pl) => (
+            <div class="pillar"><h3>{pl.title}</h3><p>{pl.body}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{home.workEyebrow}</p>
+      <h2>{home.workHeading}</h2>
+      <p>{home.workIntro}</p>
+      <div class="section-cta"><a class="btn btn-primary" href={flagshipHref}>{home.workCta}</a></div>
+    </div>
+    <div class="proj-grid">
+      {
+        projects.map((p) => (
+          <article class="card">
+            <a class="card-media" href={localizePath(`/projects/${p.slug}/`, lang)}>
+              <img src={p.image} alt={`${p.shortTitle} ${c.nav.imagePreview}`} loading="lazy" />
+            </a>
+            <div class="card-body">
+              <span class="card-kicker">{p.kicker}</span>
+              <h3>{p.title}</h3>
+              <p>{p.summary}</p>
+              <div class="tag-row">{p.stack.slice(0, 4).map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="card-links">
+                <a href={localizePath(`/projects/${p.slug}/`, lang)}>{home.cardDeepDive}</a>
+                {p.demoUrl && <a href={p.demoUrl} target="_blank" rel="noopener">{home.cardDemo}</a>}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">{home.xpEyebrow}</p><h2>{home.xpHeading}</h2></div>
+    <div class="xp">
+      {
+        experience.map((x) => (
+          <div class="xp-item">
+            <div class="xp-when">{x.when}</div>
+            <div>
+              <div><span class="xp-role">{x.role}</span> · <span class="xp-co">{x.company}</span></div>
+              <div class="xp-detail">{x.detail}</div>
+              {x.chips && <div class="tag-row xp-chips">{x.chips.map((t) => <span class="tag">{t}</span>)}</div>}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">{home.eduEyebrow}</p><h2>{home.eduHeading}</h2></div>
+    <div class="xp">
+      {
+        education.map((e) => (
+          <div class="xp-item">
+            <div class="xp-when">{e.period}</div>
+            <div>
+              <div><span class="xp-role">{e.school}</span> · <span class="xp-co">{e.degree}</span></div>
+              <div class="xp-detail">{e.detail}</div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Lab -->
+<section class="section" id="lab">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{home.labEyebrow}</p>
+      <h2>{home.labHeading}</h2>
+      <p>{home.labIntro}</p>
+    </div>
+    <div class="lab-grid">
+      {
+        labProjects.map((l) => (
+          <article class="lab-card">
+            <h3>{l.title}</h3>
+            <p>{l.blurb}</p>
+            <div class="tag-row">{l.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            <div class="card-links"><a href={l.repo} target="_blank" rel="noopener">{home.labGithub}</a></div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">{home.skillsEyebrow}</p><h2>{home.skillsHeading}</h2></div>
+    <div class="skill-grid">
+      {
+        skills.map((s) => (
+          <div class="skill-cat">
+            <h3>{s.cat}</h3>
+            <div class="tag-row">{s.items.map((i) => <span class="tag">{i}</span>)}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">{home.contactEyebrow}</p>
+    <h2>{home.contactHeading}</h2>
+    <p>{home.contactBody}</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <a class="btn btn-ghost" href={profile.github} target="_blank" rel="noopener">{c.nav.github}</a>
+      <a class="btn btn-ghost" href={profile.resumeUrl} target="_blank" rel="noopener">{home.heroResume}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import FlagshipPage from "../../../components/FlagshipPage.astro";
+import { getContent } from "../../../i18n";
+
+const c = getContent("zh");
+const f = c.flagship;
+---
+
+<BaseLayout lang="zh" title={`${f.metaTitle} — ${c.profile.name}`} description={f.metaDescription}>
+  <FlagshipPage lang="zh" />
+</BaseLayout>

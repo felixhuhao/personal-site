@@ -1,61 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { projects } from "../../data/projects";
+import ProjectDetail from "../../components/ProjectDetail.astro";
+import { getContent } from "../../i18n";
 
 export function getStaticPaths() {
-  return projects.map((project) => ({
+  return getContent("en").projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },
   }));
 }
 
 const { project } = Astro.props;
+const name = getContent("en").profile.name;
 ---
 
-<BaseLayout title={`${project.title} — ${"Hao Hu"}`} description={project.summary}>
-  <section class="wrap detail-hero">
-    <div>
-      <a class="back-link" href="/#projects">← Back to projects</a>
-      <p class="eyebrow">{project.kicker}</p>
-      <h1>{project.title}</h1>
-      <p>{project.summary}</p>
-      <div class="hero-actions">
-        {project.demoUrl && <a class="btn btn-primary" href={project.demoUrl} target="_blank" rel="noopener">Live demo (login-gated)</a>}
-        <a class="btn btn-ghost" href={project.repos[0].url} target="_blank" rel="noopener">View source</a>
-      </div>
-    </div>
-    <img class="detail-img" src={project.image} alt={`${project.shortTitle} preview`} />
-  </section>
-
-  <section class="section wrap">
-    <div class="panel" style="margin-bottom:18px">
-      <h2>How it works</h2>
-      <p class="muted">{project.architecture}</p>
-      <div class="tag-row" style="margin-top:14px">
-        {project.stack.map((t) => <span class="tag">{t}</span>)}
-      </div>
-    </div>
-
-    <div class="detail-cols">
-      <div class="panel">
-        <h2>Capabilities</h2>
-        <ul class="check">{project.capabilities.map((c) => <li>{c}</li>)}</ul>
-      </div>
-      <div class="panel">
-        <h2>Evidence</h2>
-        <ul class="check">{project.proof.map((c) => <li>{c}</li>)}</ul>
-      </div>
-      <div class="panel">
-        <h2>Try this</h2>
-        <ul class="check">{project.tryThis.map((c) => <li>{c}</li>)}</ul>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-top:18px">
-      <h2>Source</h2>
-      <div class="repo-row">
-        {project.repos.map((r) => <a href={r.url} target="_blank" rel="noopener">{r.label}</a>)}
-      </div>
-    </div>
-  </section>
+<BaseLayout lang="en" title={`${project.title} — ${name}`} description={project.summary}>
+  <ProjectDetail lang="en" project={project} />
 </BaseLayout>
